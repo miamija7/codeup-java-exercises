@@ -1,0 +1,32 @@
+
+*** JAVA I - JAVA SYNTAX, DAYA TYPES, AND VARIABLES ***
+
+Statements:
+- Direct the operation of the program
+- End with a semicolon ;
+- Can be grouped as blocks inside curly braces {}
+- Code inside of braces {} is indented
+    {
+        System.out.println("Code inside curly braces should be indented");
+        System.out.println("with four spaces");
+    }
+
+
+Comments:
+    // I am a single line comment
+
+    /* I take up one line */
+
+    /**
+     * I take up
+     * multiple
+     * lines
+     */
+
+
+Javadoc:
+- a very popular tool in the Java community that turns specially formatted comments into HTML documentation
+- you will definitely come across it when reading Java code
+
+
+Data Types:

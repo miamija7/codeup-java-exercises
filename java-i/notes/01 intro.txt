@@ -116,3 +116,15 @@ Hello World:
 - you can define a class with public class ClassName
 - the class should be in a .java file with the same name as the class
 - in order for the code in the class to run, it must be in a main method
+
+
+
+***************** RUNNING JAVA IN CMD LINE *****************
+
+Compiling and running a java program is very easy after JDK installation. Following are the steps −
+
+1.  cd to the directory (Ex: codeup-java-exercises/java-i/src)
+2.  run 'javac HelloWorld.java'
+3.  run 'java HelloWorld'
+
+You will be able to see the result printed on the window.
