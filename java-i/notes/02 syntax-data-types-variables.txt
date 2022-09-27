@@ -30,3 +30,125 @@ Javadoc:
 
 
 Data Types:
+- 8 Primitive Data Types:
+Type	Bytes   Description
+byte	  1	    Very short integers from -128 to 127
+short	  2	    Short integers from -32,768 to 32,767
+int	      4	    Integers from -2,147,483,648 to 2,147,483,647
+long	  8	    Long integers from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+float	  4	    Single-precision, floating-point numbers from -3.4E38 to 3.4E38 with up to 7 significant digits
+double	  8	    Double-precision, floating-point numbers from -1.7E308 to 1.7E308 with up to 16 significant digits
+char	  2	    A single Unicode character that’s stored in two bytes
+boolean	  1	    A true or false value
+
+
+Strings:
+"C"     String
+'C'     Char
+\       Escape
+
+
+Variables:
+- Declarations:
+    int id;
+    boolean isLoggedIn;
+    float bankAccountBalance;
+- Initialization:
+    id = 123;
+    isLoggedIn = false;
+    bankAccountBalance = 1000.23;
+- Both declaration and initialization at the same time:
+    int theAnswer = 42;
+    String question = "What is your favorite color?";
+
+
+Identifiers And Keywords:
+- identifier is a valid name for a class, method, or variable
+- an identifier must:
+     + start with a letter, underscore, or dollar sign
+     + consist of letters, dollar signs, underscores, and digits
+     + be no more than 255 characters
+-  an identifier can also not be a reserved word in Java
+
+
+Reserved Words:
+abstract, continue, for, new, switch, assert, default, goto, package,
+synchronized, boolean, do, if, private, this, break, double, implements,
+protected, throw, byte, else, import, public, throws, case, enum, instanceof,
+return, transient, catch, extends, int, short, try, char, final, interface,static,
+void, class, finally, long, strictfp, volatile, const, float, native, super, while.
+
+
+Naming Conventions:
+camelCase       variable and method names
+PascalCase      class names
+ALL_CAPS        constants
+
+
+
+Constants:
+- a notion of constants
+- denoted by the final keyword
+- values that cannot change while a program is running
+    final int SIDES_OF_A_DICE = 6;
+    final String API_KEY = "b75b703d8195f6f433ca";
+    final String GITHUB_API_BASE_URL = "https://api.github.com";
+
+
+Arithmetic Expressions:
+- Binary vs. Unary
+    + An arithmetic expression consists of operands and arithmetic operators.
+    + Binary operators operate on two operands
+    + Unary operators operate on one operand
+- Order of Precedence
+    1. Increment and decrement
+    2. Positive and negative
+    3. Multiplication, division, and modulus
+    4. Addition and subtraction
+
+
+Arithmetic and Assignment Operators:
+- Binary Operator & Meaning
+    +	Addition
+    -	Subtraction
+    *	Multiplication
+    /	Division
+    %	Modulus
+    Examples:
+    discount * price
+    sum / total
+
+- Unary Operator & Meaning
+    ++	increment (pre and post)
+    --	decrement (pre and post)
+    +	Positive sign
+    -	Negative sign
+    Examples:
+    ++numberOfLessonsCompleted
+    numberOfDaysUntilDemoDay--
+
+- Shorthand Arithmetic Assignment Operators
+    +=
+    -=
+    Examples:
+    myNumber += 9;
+
+
+Casting:
+- casting is coercing a value of one type into another
+- two types:
+    + implicit
+        - going from a more specific to a less specific type
+        - lower precision type to a higher precision type
+        - widening conversion
+        - implicitly: something that's done for you
+        - Example:
+            int myInteger = 900;
+            long morePrecise = myInteger;
+    + explicit
+        - going from a less specific type to a more specific type
+        - higher precision type to a lower precision type
+        - explicitly: the manual approach to accomplishing the change, put the name of type we are casting
+        - Example:
+            double pi = 3.14159;
+            int almostPi = (int) pi;
