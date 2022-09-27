@@ -31,6 +31,13 @@ public class HelloWorld {
         // myNumber = 123;
         // System.out.println(myNumber);
 
-        float myNumber;
+        // Exercise 9: float type can't be assigned a double value
+        float myNumber = 3.14F;
+        System.out.println(myNumber);
+
+        // Exercise 10.1 :
+        int x = 5;
+        System.out.println(x++);
+        System.out.println(x);
     }
 }
