@@ -17,18 +17,20 @@ public class HelloWorld {
         // myString = 3.14159;
 
         // Exercise 5: myNumber is not initialized
-        long myNumber;
+        // long myNumber;
         // System.out.println(myNumber);
 
-        // Exercise 6: 3.14 is a double not a long
+        // Exercise 6: 3.14 is a double not a long EXPLICIT
         // myNumber = 3.14;
 
         // Exercise 7:
-        myNumber = 123L;
-        System.out.println(myNumber);
+        // myNumber = 123L;
+        // System.out.println(myNumber);
 
-        // Exercise 8:
-        myNumber = 123;
-        System.out.println(myNumber);
+        // Exercise 8: IMPLICIT
+        // myNumber = 123;
+        // System.out.println(myNumber);
+
+        float myNumber;
     }
 }
