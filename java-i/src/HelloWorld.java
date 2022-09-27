@@ -35,9 +35,13 @@ public class HelloWorld {
         float myNumber = 3.14F;
         System.out.println(myNumber);
 
-        // Exercise 10.1 :
+        // Exercise 10.1
         int x = 5;
         System.out.println(x++);
+        System.out.println(x);
+
+        // Exercise 10.2
+        System.out.println(++x);
         System.out.println(x);
     }
 }
