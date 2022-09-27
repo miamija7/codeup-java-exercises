@@ -23,6 +23,12 @@ public class HelloWorld {
         // Exercise 6: 3.14 is a double not a long
         // myNumber = 3.14;
 
+        // Exercise 7:
+        myNumber = 123L;
+        System.out.println(myNumber);
 
+        // Exercise 8:
+        myNumber = 123;
+        System.out.println(myNumber);
     }
 }

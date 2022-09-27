@@ -152,3 +152,43 @@ Casting:
         - Example:
             double pi = 3.14159;
             int almostPi = (int) pi;
+
+
+------------------- EXTRA: Literals -------------------
+
+Integral Literals:
+    Type            Example             Base                Digits      Prefix
+    1. Decimal      int x = 108;        base ten            0-9         none
+    2. Octal        int x = 0745;       base eight          0-7         prefix of 0
+    3. Hexadecimal  int x = 0X123Fadd;  base of sixteen     0-9, A-F    prefix of 0X
+    4. Binary       int x = 0b1011;     base of two         0-1         prefix of 0B
+
+
+Literal Constant Types:
+- specified variable types, but L and F specify literal constant types
+- if they are convertible, they will be converted.
+    L   long
+    F   float
+
+
+Floating-Point Literals:
+- can be expressed using only decimal fractions or as exponential notation
+- can indicate a positive or negative value (+/-)
+- Examples:
+    decimal Number = 89d;
+    decimal Number = 3.14159e0;
+    decimal Number = 1.0e-6D;
+
+
+String Literals:
+Name 	        Character   ASCII	Hex
+Single quote	    \’	    39	    0x27
+Double quotes	    \”	    34	    0x22
+Carriage control	\r	    13	    0xd
+Backlash 	        \\	    92	    0x5c
+Newline 	        \n	    10	    0x0a
+NUL character	    \0	    0	    0x00
+Backspace	        \b	    8	    0x08
+TAB	                \t	    9	    0x09
+
+
