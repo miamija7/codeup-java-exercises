@@ -17,4 +17,4 @@ vcs.xml
 
 # Compiled output
 *.class
-out
+out/*
