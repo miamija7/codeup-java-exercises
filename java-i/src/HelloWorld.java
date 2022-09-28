@@ -32,26 +32,41 @@ public class HelloWorld {
         // System.out.println(myNumber);
 
         // Exercise 9: float type can't be assigned a double value
-        float myNumber = 3.14F;
-        System.out.println(myNumber);
+        // float myNumber = 3.14F;
+        // System.out.println(myNumber);
 
         // Exercise 10.1
-        int x = 5;
-        System.out.println(x++);
-        System.out.println(x);
+        // int x = 5;
+        // System.out.println(x++);
+        // System.out.println(x);
 
         // Exercise 10.2
-        System.out.println(++x);
-        System.out.println(x);
+        // System.out.println(++x);
+        // System.out.println(x);
 
         // Exercise 11: 'class' is a reserved word
         // int class;
 
-        //Exercise 12
+        // Exercise 12
         // String theNumberThree = "three";
         // Object o = theNumberThree;
         // int three = (int) o;
-
         // int three = (int) "3";
+
+        // Exercise 13
+        int x = 4;
+        x += 5;
+
+        x = 3;
+        int y = 4;
+        y *= x;
+
+        x = 10;
+        y = 2;
+        x /= y;
+        y -= x;
+
+        System.out.println(x);
+        System.out.println(y);
     }
 }
