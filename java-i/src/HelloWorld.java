@@ -44,6 +44,14 @@ public class HelloWorld {
         System.out.println(++x);
         System.out.println(x);
 
-        //
+        // Exercise 11: 'class' is a reserved word
+        // int class;
+
+        //Exercise 12
+        // String theNumberThree = "three";
+        // Object o = theNumberThree;
+        // int three = (int) o;
+
+        // int three = (int) "3";
     }
 }
