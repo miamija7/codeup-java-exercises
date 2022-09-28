@@ -23,7 +23,8 @@ public class ControlStatementsLecture {
         // }
         System.out.println((entre.equals("nuggies") && side.equals("fries")) ?
                 "Yay! You got my order right!":
-                "Awwww, you messed up my order...");
+                "Awwww, you messed up my order..."
+        );
 
         for (int i = 0; i < 10; i++){
             System.out.println(i);
