@@ -1,0 +1,50 @@
+*** JAVA I - Console Input and Output ***
+
+Printing Data To The Console:
+    String name = "codeup";
+    System.out.printf("Hello there, %s. Nice to see you.%n", name);
+    -->  Hello there, codeup. Nice to see you.
+
+
+Getting Input From The Console:
+- the Scanner class allows us to get data input that the user enters into the console
+- Import Statements:
+    + before using the Scanner class, we need to import it
+    +
+
+
+Packages:
+- a namespace for a group of related code
+- we'll define classes in their own packages
+- for now, we'll be using code from the java.util package
+
+
+Import Statements:
+- what let us use code from other packages
+- include code from different directories and Java libraries
+- eventually, every class you create will end up with multiple import statements
+- imports go at the top of your file, before the class definition
+- import the Scanner class from the java.util package
+
+
+NOTE:
+IDEs usually can automatically handle import statements for us. In IntelliJ, you can press (option + enter)
+after typing the Scanner class name to have IntelliJ automatically add the correct import for you. (If there
+are multiple classes in different packages that have the same name, you will be prompted to choose which one to use).
+
+
+Using the Scanner class:
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Enter something: ");
+    String userInput = scanner.next();
+    System.out.println("You entered: --> \"" + userInput + "\" <--");
+    --> Enter something: codeup
+    --> You entered: --> "codeup" <--
+
+
+Scanner Inputs:
+scanner.next()          word
+scanner.nextLine()      line
+scanner.nextInt()       number
+
+
