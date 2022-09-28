@@ -68,5 +68,8 @@ public class HelloWorld {
 
         System.out.println(x);
         System.out.println(y);
+
+        // Exercise 14
+        System.out.println(Integer.MAX_VALUE);
     }
 }
