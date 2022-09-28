@@ -6,20 +6,32 @@ public class ConsoleExercises {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please input a number: ");
         int nextInt = scanner.nextInt();
-        System.out.println(nextInt);
+        System.out.println("You entered the number: " + nextInt);
 
         // Exercise 2
-        System.out.print("Enter three words: ");
+        System.out.print("\nEnter three words: ");
         String  word1 = scanner.next(),
                 word2 = scanner.next(),
                 word3 = scanner.next();
         System.out.format("Word1: %s\nWord 2: %s\nWord 3: %s\n", word1, word2, word3);
 
-        // Exercise 3
+        // Exercise 3 & 4
         scanner.nextLine();
-        System.out.print("Gimme a Sentence: ");
+        System.out.print("\nGimme a Sentence: ");
         String sentence = scanner.nextLine();
-        System.out.println(sentence);
+        System.out.println("Here's the sentence: " + sentence);
+
+        // Exercise 5
+        System.out.print("\nGive me a length: ");
+        Integer length = Integer.parseInt(scanner.nextLine());
+        System.out.print("Give me a width: ");
+        Integer width = Integer.parseInt(scanner.nextLine());
+        System.out.format("Area: %d\nPerimeter: %d", length * width, length * 2 + width * 2);
+
+        // Exercise 6
+        // scanner.useDelimiter("\n");
+
+
 
 
     }
