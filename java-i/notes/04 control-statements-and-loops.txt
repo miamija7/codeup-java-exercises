@@ -1,0 +1,109 @@
+*** JAVA I - Control Statements & Loops ***
+
+Focus: boolean expressions, logical operators, and control structures in Java.
+
+Boolean Expressions:
+- boolean expression is true or false
+- boolean expressions to determine the flow of our control statements
+- Java has no concept of truthy or falsy
+- the expressions we use in our control structures must evaluate to boolean values
+-----------------
+Operator	Name
+==	        Equality
+!=	        Inequality
+>           Greater Than
+<	        Less Than
+>=	        Greater Than Or Equal
+<=	        Less Than Or Equal
+
+
+Logical Operators:
+- allow us to combine multiple boolean values to produce a single boolean value
+--------------------------------
+Operator	Name	Description
+&&	        And	    Returns true if both expressions are true. Only evaluates the second expression if necessary
+||	        Or	    Returns true if either expression is true. Only evaluates the second expression if necessary
+&	        And	    Returns true if both expressions are true. Always evaluates both expressions
+|	        Or	    Returns true if either expressions is true. Always evaluates both expressions
+!	        Not	    Reverses the value of the expression
+
+
+String Comparison:
+- each string is a different object
+- use .equals or .equalsIgnoreCase method on the String we want to compare
+    boolean confirmation = userInput.equals("y");
+
+
+Control Structures:
+- allow us to control the flow of execution of our code
+- either executing code conditionally, or repeatedly
+- condition part of the control structures must evaluate to a boolean value
+- Our control structures fall into two categories:
+    1. Selection Statements (Conditionals): Control structures that conditionally execute code (if and switch)
+    2. Loops: Control structures that repeatedly execute codex (while, do, and for loops)
+
+
+If Statement:
+    if ( condition ) {
+        ...
+    } else if ( condition ) {
+        ...
+    } else {
+        ...
+    }
+
+
+Switch Statement:
+    int caseSwitch = 1;
+
+    switch (caseSwitch) {
+        case 1:
+            ...
+            break;
+        case 2:
+            ...
+            break;
+        default:
+            ...
+            break;
+    }
+
+
+While Loop:
+    while ( condition ) {
+        ...
+    }
+
+
+Do Loop:
+    do {
+        ...
+    }while( condition );
+
+
+For Loop:
+NOTE: any for loop can also be expressed as a while loop
+    for( initialize ; condition ; update ) {
+        ...
+    }
+
+
+Break And Continue:
+- alter the flow of a loop
+- break: exit the current loop
+    for(int i = 1; i < 100; i++) {
+        System.out.println(i);
+        if (i == 5) {
+            break; // --------------+
+        } //                        |
+    } //                            |
+    // <----------------------------+
+
+- continue: skip the current loop
+    for(int i = 1; i <= 10; i++) { // <--+
+        if(i % 2 == 1) { //              |
+            continue; // ----------------+
+        }
+        System.out.println(i);
+    }
+
