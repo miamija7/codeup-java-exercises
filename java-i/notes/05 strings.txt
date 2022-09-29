@@ -1,0 +1,11 @@
+*** JAVA I - Strings ***
+
+
+Focus: how to work with and manipulate strings.
+
+
+String Definition:
+- a String is letters, numbers, and special characters strung together
+- strings are objects, not primitives
+- String variables are a reference type, not a primitive type
+- the == operator with two objects checks if both sides are the same reference, if they refer to the same object
