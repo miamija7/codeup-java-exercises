@@ -11,21 +11,21 @@ public class Input {
     private Scanner scanner;
 
     // Methods
-    public String getString(){
-        System.out.print("Gimme a string: ");
+    public String getString(String... prompt){
+        if (prompt.length > 0) { System.out.print("Gimme a string: "); }
         return this.scanner.nextLine();
     }
 
-    public boolean yesNo(){
-        System.out.print("Want a boolean? (y/n): ");
+    public boolean yesNo(String... prompt){
+        if (prompt.length > 0) { System.out.print("Want a boolean? (y/n): "); }
         return (this.scanner.nextLine().toLowerCase().startsWith("y"));
     }
 
-    public int getInt(int min, int max) {
+    public int getInt(int min, int max, String... prompt) {
         int userInput;
 
         do  {
-            System.out.print("Gimme an integer between " + min + " and " + max + ": ");
+            if (prompt.length > 0) { System.out.print("Gimme an integer between " + min + " and " + max + ": "); }
             userInput = this.scanner.nextInt();
         } while (userInput > max || userInput < min);
 
@@ -33,16 +33,16 @@ public class Input {
         return userInput;
     }
 
-    public int getInt() {
-        System.out.print("Gimme an integer: ");
+    public int getInt(String... prompt) {
+        if (prompt.length > 0) { System.out.print("Gimme an integer: "); }
         return this.scanner.nextInt();
     }
 
-    public double getDouble(double min, double max) {
+    public double getDouble(double min, double max, String... prompt) {
         double userInput;
 
         do  {
-            System.out.print("Gimme a double between " + min + " and " + max + ": ");
+            if (prompt.length > 0) { System.out.print("Gimme a double between " + min + " and " + max + ": "); }
             userInput = this.scanner.nextDouble();
         } while (userInput > max || userInput < min);
 
@@ -50,8 +50,8 @@ public class Input {
         return userInput;
     }
 
-    public double getDouble() {
-        System.out.print("Gimme a double: ");
+    public double getDouble(String... prompt) {
+        if (prompt.length > 0) { System.out.print("Gimme a double: "); }
         return this.scanner.nextDouble();
     }
 }
