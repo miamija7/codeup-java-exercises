@@ -16,9 +16,9 @@ public class HighLow {
         // VARIABLES & SCANNER
         Scanner sc = new Scanner(System.in);
         boolean isGameOver = false;
-        int answer = (int)(Math.random() * 100) + 1,
-                guess,
-                guessesCount = 10;
+        int guess,
+            guessesCount = 10,
+            answer = (int)(Math.random() * 100) + 1;
 
         // PLAY GAME!
         System.out.println("\nGUESS A RANDOM NUMBER 1-100!");

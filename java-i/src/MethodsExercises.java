@@ -45,39 +45,6 @@ public class MethodsExercises {
         rollDie(sc.nextInt());
     }
 
-    // Exercise 4
-    public static void rollDie(int sides){
-        int dieCount = 2;
-        for (int i = 1; i <= dieCount; i++){
-            System.out.printf("Rolling Die %d... %d%n", i, ((int)(Math.random() * sides) + 1));
-        }
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Wanna roll again? (y/n) ");
-        String userRollsAgain = sc.nextLine().toLowerCase();
-        if (userRollsAgain.startsWith("y")) { rollDie(sides); }
-    }
-
-
-    // Exercise 3
-    public static long factorial(int factor){
-        int n = validateInput(1, 10, factor);
-        long fact = 1;
-        for (int i = 2; i <= n; i++) {
-            fact *= i;
-        }
-        return fact;
-    }
-
-    // Exercise 2
-    public static int validateInput(int min, int max, int userInput){
-        if (userInput < min || userInput > max) {
-            System.out.printf("Please enter a number BETWEEN %d and %d: ", min, max);
-            Scanner sc = new Scanner(System.in);
-            userInput = sc.nextInt();
-            userInput = validateInput(min, max, userInput);
-        }
-        return userInput;
-    }
 
     // Exercise 1
     public static int addition(int num1, int num2) {
@@ -103,4 +70,39 @@ public class MethodsExercises {
         return num1 % num2;
     }
 
+
+    // Exercise 2
+    public static int validateInput(int min, int max, int userInput){
+        if (userInput < min || userInput > max) {
+            System.out.printf("Please enter a number BETWEEN %d and %d: ", min, max);
+            Scanner sc = new Scanner(System.in);
+            userInput = sc.nextInt();
+            userInput = validateInput(min, max, userInput);
+        }
+        return userInput;
+    }
+
+
+    // Exercise 3
+    public static long factorial(int factor){
+        int n = validateInput(1, 10, factor);
+        long fact = 1;
+        for (int i = 2; i <= n; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+
+
+    // Exercise 4
+    public static void rollDie(int sides){
+        int dieCount = 2;
+        for (int i = 1; i <= dieCount; i++){
+            System.out.printf("Rolling Die %d... %d%n", i, ((int)(Math.random() * sides) + 1));
+        }
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Wanna roll again? (y/n) ");
+        String userRollsAgain = sc.nextLine().toLowerCase();
+        if (userRollsAgain.startsWith("y")) { rollDie(sides); }
+    }
 }

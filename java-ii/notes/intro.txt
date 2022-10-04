@@ -1,0 +1,194 @@
+
+*** JAVA II - INTRO ***
+
+
+Goal: learn Classes and Objects; as well as, how to create and use: objects, static and instance
+      fields, constructors, and visibility.
+
+
+We will encounter:
+- Objects that represent application entities whose properties map to database tables
+- Utility classes with static methods that hash passwords
+- Objects that represent a database connection
+- Objects that have a field that is a database connection object that talks to the database
+- Classes with static methods that create database connections
+
+
+Classes And Objects:
+- A class is used to define a custom type in Java (template/blueprint)
+- A field is a variable or method that belongs to an object or a class (properties (variables) or methods (functions))
+- An object is an instance of a class (new keyword)
+
+
+Example:
+- defining a Person class
+- creating an instance of it
+
+    class Person {
+        public String firstName;
+        public String lastName;
+
+        public String sayHello() {
+            return String.format("Hello from %s %s!", firstName, lastName);
+        }
+
+        public static void main(String[] args) {
+            Person rick = new Person();
+            rick.firstName = "Rick";
+            rick.lastName = "Sanchez";
+            System.out.println(rick.sayHello());
+            // prints "Hello from Rick Sanchez!"
+        }
+    }
+
+- class: Person
+- instance variables/fields: firstName and lastName
+- instance method: sayHello
+
+
+Static vs Instance:
+- fields can belong either to a class or an object
+- each object can have different values for their instance fields
+- each class has static fields, accessible through the class itself
+- simple example of referencing a static field on a class:
+    System.out.println(Math.PI); // 3.141592653589793
+    NOTE: "." used to refer to the static field
+
+    NOTE: Static fields can be referenced by instance methods, but instance fields cannot be referenced in a static context
+    class Arithmetic {
+        // static property
+        public static double pi = 3.14159;
+
+        // static methods
+        public static int add(int x, int y) {
+            return x + y;
+        }
+
+        public static int multiply(int x, int y) {
+            return x * y;
+        }
+    }
+
+
+Constructors:
+- a special method that is called when an object is created
+- has the same name as the class and does not define a return type
+- can accept arguments and be overloaded
+
+    class Person {
+        public String name;
+
+        // the Person constructor
+        public Person() {
+            System.out.println("A Person is being created!");
+        }
+
+        public static void main(String[] args) {
+            Person p1 = new Person();
+            Person p2 = new Person();
+        }
+    }
+
+    --> A Person is being created!
+    --> A Person is being created!
+
+- the constructor is called whenever we use the new keyword to create an instance of the class
+- common for constructors is to set, or provide default values for, an object's fields
+
+    class Student {
+        public String name;
+        public String cohort;
+
+        // Constructor
+        public Student(String studentName) {
+            name = studentName;
+            cohort = "Unassigned";
+        }
+
+        // Constructor
+        public Student(String studentName, String assignedCohort) {
+            name = studentName;
+            cohort = assignedCohort;
+        }
+
+        public String getInfo() {
+            return String.format("name: %s, cohort: %s", name, cohort);
+        }
+
+        public static void main(String[] args) {
+            Student s1 = new Student("Student A");
+            Student s2 = new Student("Student B", "Voyagers");
+            System.out.println(s1.getInfo()); // "name: Student A cohort: Unassigned"
+            System.out.println(s2.getInfo()); // "name: Student B cohort: Voyagers"
+        }
+    }
+
+
+The "this" Keyword:
+- provides us a way to refer to the current instance
+- think of this as saying "this object"
+- can also be used to call other constructors
+
+    class Student {
+        public String name;
+        public String cohort;
+
+        public Student(String name) {
+            this(name, "Unassigned");
+        }
+
+        public Student(String name, String cohort) {
+            this.name = name;
+            this.cohort = cohort;
+        }
+
+        public String sayHello() {
+            return "Hello from " + this.name + "!";
+        }
+    }
+
+- instead of duplicating the code, we call the constructor that already has this code defined
+- we can avoid duplication of code with multiple constructors
+
+
+Visibility:
+- visibility refers to how a class or instance field is allowed to be accessed
+- allows us to encapsulate the data in our classes
+- only expose what is necessary to other classes and objects
+- common pattern in Java is to define classes with private fields, and create methods to allow access to those fields
+
+    class Student {
+        public String name;
+        private double grade;
+
+        public Student(String name, double grade) {
+            this.name = name;
+            this.grade = grade;
+        }
+
+        public double shareGrade() {
+            return grade;
+        }
+    }
+
+- the grade field is defined as private
+- but we've also created a method to allow access to (but not re-assigning) the field named shareGrade
+
+    class StudentTest {
+        public static void main(String[] args) {
+            Student student = new Student("John Doe", 82.4);
+
+            System.out.println(student.name); // "John Doe"
+            // DON'T DO THIS - private properties can't be accessed outside the class
+            System.out.println(student.grade);
+            System.out.println(student.shareGrade()); // Do this instead
+        }
+    }
+
+
+Visibilities Types in Java:
+    Modifier	                      class	 package   subclass	project
+    public	                        y	    y	       y	   y
+    protected	                    y	    y	       y	   n
+    no modifier (package private)	y	    y	       n	   n
+    private	                        y	    n	       n	   n
