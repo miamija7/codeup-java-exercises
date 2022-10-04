@@ -4,7 +4,7 @@ public class Person {
         this.name = name;
     }
 
-    // Variables
+    // Variables/Fields
     private String name;
 
     // Methods
