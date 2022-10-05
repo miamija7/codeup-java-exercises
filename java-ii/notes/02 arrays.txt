@@ -1,0 +1,91 @@
+
+*** JAVA II - Object Oriented Programming ***
+
+
+Arrays in Java:
+- arrays are a special kind of object that contain zero or more items called elements
+- elements can be any valid type (including a custom class we've defined ourselves)
+- all elements must be of the same type
+
+    // Type of Array
+    double[] prices;
+
+    // Fixed size of Array
+    prices = new double[4];
+
+    // Size of Array
+    final int NUMBER_OF_BEATLES = 4;
+    BandMember[] theBeatles = new BandMember[NUMBER_OF_BEATLES];
+
+    // Example
+    int numberOfBugs = (int) Math.floor(Math.random() * 100);
+    Bug[] myCode = new Bug[numberOfBugs];
+
+
+
+Working with Array Elements:
+- elements of an array are indexed
+- elements that have not been initialized will have that type's default value:
+
+    Type	                    Default Value
+    integer number types	    0
+    decimal number types	    0.0
+    boolean	                    false
+    character	                \0 (zero)
+    object	                    null
+
+- Referring to an index that outside the range of the array will cause an ArrayIndexOutOfBoundsException
+- An array's size and elements can both be defined when it is created with array initializer syntax.
+
+    // Array initializer syntax
+    String[] beatles = {"John", "Paul", "Ringo"};
+
+
+
+Iterating:
+for (int i = 0; i < array.length; i += 1) {...}
+for (DataType element : array) {...}
+
+
+
+The Arrays Class:
+- java.util.Arrays
+- contains static methods for common array manipulation tasks
+
+    void Arrays.fill(arrayName, value)           fills elements of specified array with specified value
+    boolean Arrays.equals(array1, array2)       return true if same type and value of all elements are equal
+    array Arrays.copyOf(array, length)          returns a copy of the given array with the specified length
+    String Arrays.toString(array)               returns a string representation of the array
+    void Arrays.sort(array)                     sorts the elements of an array into ascending order
+
+
+Two-Dimensional Arrays:
+- we can define an array whose elements are themselves arrays
+- this is called a two-dimensional array, or a matrix
+- think of a two-dimensional array like a grid, with rows and columns
+
+    int[][] matrix = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+    for (int[] row : matrix) {
+        System.out.println("+---+---+---+");
+        System.out.print("| ");
+        for (int n : row) {
+            System.out.print(n + " | ");
+        }
+        System.out.println();
+    }
+    System.out.println("+---+---+---+");
+
+    +---+---+---+
+    | 1 | 2 | 3 |
+    +---+---+---+
+    | 4 | 5 | 6 |
+    +---+---+---+
+    | 7 | 8 | 9 |
+    +---+---+---+
+
+

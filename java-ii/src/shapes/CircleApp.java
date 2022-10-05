@@ -7,8 +7,12 @@ public class CircleApp {
         boolean again = true;
         do {
             Circle.createNewCircle();
-            System.out.print("\nYou wanna make another Circle? (y/n) ");
-            again = Input.yesNo();
+            again = prompt();
         } while (again);
+    }
+
+    public static boolean prompt(){
+        System.out.print("\nYou wanna make another Circle? (y/n) ");
+        return Input.yesNo();
     }
 }
