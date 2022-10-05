@@ -6,7 +6,6 @@ public class Circle {
     // Variables/Fields
     private double radius;
 
-
     // Constructor
     public Circle(double radius){
         this.radius = radius;
