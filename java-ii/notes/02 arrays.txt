@@ -1,5 +1,5 @@
 
-*** JAVA II - Object Oriented Programming ***
+*** JAVA II - Arrays ***
 
 
 Arrays in Java:
