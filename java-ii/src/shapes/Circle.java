@@ -1,5 +1,7 @@
 package shapes;
 
+import util.Input;
+
 public class Circle {
     // Variables/Fields
     private double radius;
@@ -25,6 +27,15 @@ public class Circle {
 
     public void setRadius(double radius){
         this.radius = radius;
+    }
+
+    public static void createNewCircle() {
+        System.out.println("\n------ Creating a new circle ------");
+        System.out.print("Input Circle's radius: ");
+
+        Circle myCircle = new Circle(Input.getDouble());
+        System.out.printf("Area: %.2f%n", myCircle.getArea());
+        System.out.printf("Circumference: %.2f%n", myCircle.getCircumference());
     }
 
 }

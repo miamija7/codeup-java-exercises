@@ -1,57 +1,50 @@
 package util;
 import java.util.Scanner;
 
-public class Input {
-    // Constructor
-    public Input() {
-        this.scanner = new Scanner(System.in);
-    }
+public final class Input {
 
     // Variables/Fields
-    private Scanner scanner;
+    private static Scanner scanner = new Scanner(System.in);
+
 
     // Methods
-    public String getString(String... prompt){
+    public static String getString(String... prompt){
         if (prompt.length > 0) { System.out.print("Gimme a string: "); }
-        return this.scanner.nextLine();
+        scanner.nextLine();
+        return scanner.nextLine();
     }
 
-    public boolean yesNo(String... prompt){
+    public static boolean yesNo(String... prompt){
         if (prompt.length > 0) { System.out.print("Want a boolean? (y/n): "); }
-        return (this.scanner.nextLine().toLowerCase().startsWith("y"));
+        scanner.nextLine();
+        return (scanner.nextLine().toLowerCase().startsWith("y"));
     }
 
-    public int getInt(int min, int max, String... prompt) {
+    public static int getInt(int min, int max, String... prompt) {
         int userInput;
-
         do  {
             if (prompt.length > 0) { System.out.print("Gimme an integer between " + min + " and " + max + ": "); }
-            userInput = this.scanner.nextInt();
+            userInput = scanner.nextInt();
         } while (userInput > max || userInput < min);
-
-        scanner.nextLine();
         return userInput;
     }
 
-    public int getInt(String... prompt) {
+    public static int getInt(String... prompt) {
         if (prompt.length > 0) { System.out.print("Gimme an integer: "); }
-        return this.scanner.nextInt();
+        return scanner.nextInt();
     }
 
-    public double getDouble(double min, double max, String... prompt) {
+    public static double getDouble(double min, double max, String... prompt) {
         double userInput;
-
         do  {
             if (prompt.length > 0) { System.out.print("Gimme a double between " + min + " and " + max + ": "); }
-            userInput = this.scanner.nextDouble();
+            userInput = scanner.nextDouble();
         } while (userInput > max || userInput < min);
-
-        scanner.nextLine();
         return userInput;
     }
 
-    public double getDouble(String... prompt) {
+    public static double getDouble(String... prompt) {
         if (prompt.length > 0) { System.out.print("Gimme a double: "); }
-        return this.scanner.nextDouble();
+        return scanner.nextDouble();
     }
 }
