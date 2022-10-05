@@ -1,2 +1,142 @@
 
 *** JAVA II - Inheritance and Polymorphism ***
+
+
+Inheritance:
+- classes that extend, or inherit from another class
+- extends keyword
+- child class = subclasses
+- parent class = superclasses
+
+    class Person {
+        public String name;
+        public Person(String name) {
+            this.name = name;
+        }
+        public void sayHello() {
+            System.out.println("Hello from " + name + "!");
+        }
+    }
+
+    class Employee extends Person {
+        public Employee(String employeeName){
+            super(employeeName);
+        }
+    }
+
+    Employee john = new Employee("John");
+    john.sayHello();
+    System.out.println(john.name);
+
+
+
+Extending Classes:
+- Inheritance is one-directional
+- subclasses gain access to the fields of their superclasses, not vice versa
+- adding fields to a subclass is extending
+- access to superclass fields AND new subclass fields
+
+
+Overriding:
+- subclasses can override methods on the superclass
+- subclass must define a method with the same name, return type, and parameters as in the superclass
+- provide a subclass its own implementation of a method
+
+
+Access Modifiers:
+- Visibility: public, protected, private
+- the private keyword:
+    + makes fields inaccessible outside the class that defines them (including subclasses)
+    + Example: private int age;
+- the public keyword:
+    + we want a field to be visible to superclasses and subclasses
+    + the field is not visible outside the class
+    + is visible to classes that extend the class
+    + Example: protected String name;
+
+
+The super Keyword:
+- wish to call the superclass' implementation of a method
+- super keyword allows us to access a superclass' methods and constructors from within a subclass
+- commonly used in subclass constructors
+
+    class Person {
+        private String name;
+        public Person(String name) {
+            this.name = name;
+        }
+        public String getName() {
+            return name;
+        }
+    }
+
+    class SuperHero extends Person {
+        private String alterEgo;
+        public SuperHero(String name, String alterEgo) {
+            super(name);
+            this.alterEgo = alterEgo;
+        }
+        public String getName() {
+            return alterEgo;
+        }
+        public String getSecretIdentity() {
+            return super.getName();
+        }
+    }
+
+
+Polymorphism:
+- feature of inheritance
+- allows us to treat objects of different subclasses' with same superclass, as if they were same type: superclass
+- methods or variables defined with a superclass type can accept objects that are a subclass of that type
+
+    public class Employee {
+        public String work() {
+            return "Filling out TPS reports";
+        }
+    }
+
+    public class Manager extends Employee {
+        public String work() {
+            return "Managing employees";
+        }
+    }
+
+    class PolymorphismDemo {
+        public void doWork(Employee e) {
+            System.out.println(e.work());
+        }
+        public static void main(String[] args) {
+            Employee one = new Employee();
+            Employee two = new Manager();
+
+            doWork(one); // "Filling out TPS reports"
+            doWork(two); // "Managing employees"
+        }
+    }
+
+    NOTE: The methods that are able to be called on an object are defined by the type of the reference;
+    that is to say, the type of the variable or parameter that holds the object. The method implementation
+    that is used is determined by the type of the object itself.
+
+
+The final Keyword:
+- use cases: classes & variables/parameters
+- prevent reassignment
+    public int increment(final int x) {
+        x += 1; // ERROR!
+        return x;
+    }
+- prevent inheritance
+    public final class Movie { }
+    public class Drama extends Movie { ... }   // ERROR!
+- prevent overriding
+    public class Employee {
+        public final String work() { return "Filling out TPS reports"; }
+    }
+    public class Developer extends Employee {
+         public String work() { return "Writing code"; }   // ERROR!
+    }
+
+
+
