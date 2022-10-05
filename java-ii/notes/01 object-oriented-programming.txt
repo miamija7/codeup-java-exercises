@@ -1,5 +1,5 @@
 
-*** JAVA II - INTRO ***
+*** JAVA II - Object Oriented Programming ***
 
 
 Goal: learn Classes and Objects; as well as, how to create and use: objects, static and instance
