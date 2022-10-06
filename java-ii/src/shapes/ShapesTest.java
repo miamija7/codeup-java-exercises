@@ -9,6 +9,5 @@ public class ShapesTest {
         Rectangle box2 = new Square(5);
         System.out.println("\n====== box2 ======");
         System.out.printf("Area: %d%nPerimeter: %d%n", box2.getArea(), box2.getPerimeter());
-
     }
 }
