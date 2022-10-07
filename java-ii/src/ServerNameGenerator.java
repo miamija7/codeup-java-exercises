@@ -8,7 +8,7 @@ public class ServerNameGenerator {
         Scanner sc = new Scanner(System.in);
         String[] adjectives = { "Aloof", "Clumsy", "Flying", "Enthusiastic", "Amused", "Adorable", "Wild", "Livid", "Troubled", "Graceful" };
         String[] nouns = { "Coffee", "Grass", "Cow", "Potato", "Lama", "Tornado", "Peach", "Cheese", "Nap", "Honey" };
-        System.out.println("======= Name Generator =======\n| [ENTER] to generate        |\n| 'q' + [ENTER] to quit      |\n==============================");
+        System.out.println("======= Name Generator =======\n| [ENTER] to generate        |\n| 'q'+[ENTER] to quit        |\n==============================");
         String userInput;
         do {
             System.out.print(generateName(adjectives, nouns));
