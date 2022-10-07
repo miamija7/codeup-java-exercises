@@ -9,10 +9,10 @@ public class MoviesApplication {
         while(menuSelect != 0){
             if (menuSelect == 1) { System.out.println(Arrays.toString(MoviesArray.findAll())); }
             else if (menuSelect == 2) { Movie.addMovie(); }
-            else if (menuSelect == 3) { Movie.addMovie(); }
-            else if (menuSelect == 4) { Movie.addMovie(); }
-            else if (menuSelect == 5) { Movie.addMovie(); }
-            else { Movie.addMovie(); }
+            else if (menuSelect == 3) { MoviesArray.findAll("animated"); }
+            else if (menuSelect == 4) { MoviesArray.findAll("drama"); }
+            else if (menuSelect == 5) { MoviesArray.findAll("horror"); }
+            else { MoviesArray.findAll("scifi"); }
             System.out.print("Enter your next choice: ");
             menuSelect = Input.getInt();
         }

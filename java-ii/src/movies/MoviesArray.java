@@ -1,5 +1,7 @@
 package movies;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MoviesArray {
@@ -127,9 +129,19 @@ public class MoviesArray {
         return movies;
     }
 
-    public static Movie[] findAll(String category) {
 
-        return movies;
+    public static Movie[] findAll(String category) {
+        int count = 0;
+        for(Movie movie: movies){
+            if (movie.getCategory().equals(category))count++;
+        }
+        Movie[] filtered = new Movie[count];
+        for(int i = 0; i < filtered.length; i++){
+            for(Movie movie: movies){
+                if (movie.getCategory().equals(category)) filtered[i] = movie;
+            }
+        }
+        return filtered;
     }
 
 
