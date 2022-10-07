@@ -46,4 +46,8 @@ public final class Input {
         if (prompt.length > 0) { System.out.print("Gimme a double: "); }
         return scanner.nextDouble();
     }
+
+    public static void clear() {
+        scanner.nextLine();
+    }
 }

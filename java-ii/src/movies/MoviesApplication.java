@@ -5,6 +5,20 @@ import java.util.Arrays;
 
 public class MoviesApplication {
     public static void main(String[] args) {
+        int menuSelect = displayMenu();
+        while(menuSelect != 0){
+            if (menuSelect == 1) { System.out.println(Arrays.toString(MoviesArray.findAll())); }
+            else if (menuSelect == 2) { Movie.addMovie(); }
+            else if (menuSelect == 3) { Movie.addMovie(); }
+            else if (menuSelect == 4) { Movie.addMovie(); }
+            else if (menuSelect == 5) { Movie.addMovie(); }
+            else { Movie.addMovie(); }
+            System.out.print("Enter your next choice: ");
+            menuSelect = Input.getInt();
+        }
+    }
+
+    public static int displayMenu() {
         System.out.print("============= MOVIES APP =============\n" +
                 "    (select a menu option)" +
                 "    0 - exit\n" +
@@ -16,24 +30,6 @@ public class MoviesApplication {
                 "    6 - view movies in the scifi category\n" +
                 "\n" +
                 "Enter your choice: ");
-        int userInput = Input.getInt();
-        System.out.println(userInput);
-        while(userInput != 0){
-            switch (userInput) {
-                case 1:
-                    System.out.println(Arrays.toString(MoviesArray.findAll()));
-                    break;
-                case 2:
-                    Movie.addMovie();
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-            }
-        }
+        return Input.getInt();
     }
 }
