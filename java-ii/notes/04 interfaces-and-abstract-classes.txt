@@ -107,3 +107,31 @@ Working With Interfaces:
 - change the single line of code that references ConsoleFormatter to instead reference HTMLFormatter
 - write our code to depend on the interface and not the implementation
 - allows us to easily switch out the implementation, and for our code base to be better structured and more flexible
+
+
+
+
+Interfaces vs Abstract Classes:
+In summary...
+
+Abstract Classes:
+- Can use instance as well as static variables and constants.
+- Can define regular methods that contain code and abstract methods that don’t contain code.
+- Can define static methods.
+- Make use of the abstract and extends keywords.
+- Contain
+    + instance and static variables.
+    + instance and static constants.
+    + instance and static methods.
+
+Interfaces:
+- A class can directly implement multiple interfaces.
+- Any object created from a class that implements an interface can be used wherever the interface is accepted.
+- Can be used in place of classes to decouple parts of our code from implementation details.
+- Make use of the implements and interface keywords.
+- Contain
+    + abstract methods.
+    + static constants.
+
+In Java, any class can both extend abstract classes and implement interfaces.
+
