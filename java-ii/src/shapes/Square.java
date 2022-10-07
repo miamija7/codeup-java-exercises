@@ -6,6 +6,7 @@ public class Square extends Quadrilateral{
         super(side, side);
     }
 
+    // Methods
     @Override
     public double getPerimeter() {
         return this.width * 4;
