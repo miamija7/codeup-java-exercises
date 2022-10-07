@@ -16,7 +16,6 @@ public final class Input {
 
     public static boolean yesNo(String... prompt){
         if (prompt.length > 0) { System.out.print("Want a boolean? (y/n): "); }
-        scanner.nextLine();
         return (scanner.nextLine().toLowerCase().startsWith("y"));
     }
 
