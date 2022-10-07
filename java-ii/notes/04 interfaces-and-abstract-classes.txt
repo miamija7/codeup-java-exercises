@@ -135,3 +135,7 @@ Interfaces:
 
 In Java, any class can both extend abstract classes and implement interfaces.
 
+
+NOTE: Interfaces can actually provide implementations for methods as of java 8 with the default keyword. ↩
+
+
