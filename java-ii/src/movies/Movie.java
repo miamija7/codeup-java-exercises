@@ -6,7 +6,7 @@ public class Movie {
     // Variables/Fields
     private String name;
     private String category;
-    private static final String[] categories = { "animated", "drama", "horror", "scifi" };
+    private static String[] categories = { "animated", "drama", "horror", "scifi" };
 
     // Constructor
     public Movie(String name, String category) {
@@ -32,12 +32,17 @@ public class Movie {
     }
 
     public static void addMovie() {
-        System.out.println("======= Add A Movie =======");
+        System.out.println("\n------------- ADD A MOVIE -------------");
         System.out.print("Movie Name: ");
         String name = Input.getString();
-        System.out.print("Categories \n0 animated\n1 drama \n2 horror\n3 scifi\nMovie Category: ");
+        System.out.print("    (select a category)\n");
+        for(int i = 0; i < categories.length; i++) {
+            System.out.printf("    %d - %s\n", i, categories[i]);
+        }
+        System.out.print("Movie Category: ");
         String category = categories[Input.getInt()];
         Input.clear();
-        MoviesArray.add(new Movie(name.toLowerCase(), category.toLowerCase()));
+        MoviesArray.add(new Movie(name, category.toLowerCase()));
+        System.out.printf("\"%s -- %s\" added!", name, category);
     }
 }

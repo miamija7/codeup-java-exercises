@@ -7,29 +7,31 @@ public class MoviesApplication {
     public static void main(String[] args) {
         int menuSelect = displayMenu();
         while(menuSelect != 0){
-            if (menuSelect == 1) { System.out.println(Arrays.toString(MoviesArray.findAll())); }
-            else if (menuSelect == 2) { Movie.addMovie(); }
+            if (menuSelect == 1) { Movie.addMovie(); }
+            else if (menuSelect == 2) { MoviesArray.findAll(); }
             else if (menuSelect == 3) { MoviesArray.findAll("animated"); }
             else if (menuSelect == 4) { MoviesArray.findAll("drama"); }
             else if (menuSelect == 5) { MoviesArray.findAll("horror"); }
-            else { MoviesArray.findAll("scifi"); }
-            System.out.print("Enter your next choice: ");
+            else if (menuSelect == 6) { MoviesArray.findAll("scifi"); }
+            else { menuSelect = displayMenu(); continue; }
+            System.out.print("\n\n[0-Exit] Enter Menu Option: ");
             menuSelect = Input.getInt();
         }
     }
 
     public static int displayMenu() {
-        System.out.print("============= MOVIES APP =============\n" +
-                "    (select a menu option)" +
+        System.out.print("\n\n============= MOVIES APP =============\n" +
+                "    (select a menu option)\n" +
                 "    0 - exit\n" +
-                "    1 - view all movies\n" +
-                "    2 - add a movie\n" +
-                "    3 - view movies in the animated category\n" +
-                "    4 - view movies in the drama category\n" +
-                "    5 - view movies in the horror category\n" +
-                "    6 - view movies in the scifi category\n" +
+                "    1 - add a movie\n" +
+                "    2 - view all movies\n" +
+                "    3 - view animated movies\n" +
+                "    4 - view drama movies\n" +
+                "    5 - view horror movies\n" +
+                "    6 - view scifi movies\n" +
+                "    7 - view menu\n" +
                 "\n" +
-                "Enter your choice: ");
+                "Enter Menu Option: ");
         return Input.getInt();
     }
 }

@@ -3,6 +3,7 @@ package movies;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class MoviesArray {
     // Variables
@@ -125,23 +126,30 @@ public class MoviesArray {
         }
     }
 
-    public static Movie[] findAll() {
-        return movies;
+    public static void findAll() {
+        System.out.println("\n------------- ALL MOVIES -------------=");
+        for(Movie movie: movies){
+            System.out.printf("%s -- %s%n", movie.getName(), movie.getCategory());
+        }
     }
 
 
-    public static Movie[] findAll(String category) {
+    public static void findAll(String category) {
         int count = 0;
         for(Movie movie: movies){
             if (movie.getCategory().equals(category))count++;
         }
         Movie[] filtered = new Movie[count];
-        for(int i = 0; i < filtered.length; i++){
-            for(Movie movie: movies){
-                if (movie.getCategory().equals(category)) filtered[i] = movie;
+        int i = 0;
+        for(Movie movie: movies){
+            if (movie.getCategory().equals(category)){
+                filtered[i++] = movie;
             }
         }
-        return filtered;
+        System.out.printf("\n------------- %s -------------\n", category.toUpperCase());
+        for(Movie movie: filtered){
+            System.out.printf("%s -- %s%n", movie.getName(), movie.getCategory());
+        }
     }
 
 
