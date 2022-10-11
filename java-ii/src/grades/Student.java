@@ -26,6 +26,12 @@ public class Student {
         }
         return (double) total/grades.size();
     }
+    public void printGrades(){
+        System.out.print("Recorded Grades: ");
+        for (Integer grade : grades){
+            System.out.print(grade + " ");
+        }
+    }
 
 
 }

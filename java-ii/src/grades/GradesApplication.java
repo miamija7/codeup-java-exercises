@@ -1,39 +1,94 @@
 package grades;
+import org.w3c.dom.ls.LSOutput;
+import util.Input;
+
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class GradesApplication {
     public static void main(String[] args) {
         HashMap<String, Student> students = new HashMap<>();
+        Scanner sc = new Scanner(System.in);
+        boolean again = true;
 
-
-        Student spongebob = new Student("Spongebob");
-        spongebob.addGrade(97);
-        spongebob.addGrade(74);
-        spongebob.addGrade(58);
-
-        Student squidward = new Student("Squidward");
-        squidward.addGrade(34);
-        squidward.addGrade(76);
-        squidward.addGrade(65);
-
-        Student patrick = new Student("Patrick");
-        patrick.addGrade(100);
-        patrick.addGrade(94);
-        patrick.addGrade(23);
-
-        Student sandy = new Student("Sandy");
-        sandy.addGrade(85);
-        sandy.addGrade(99);
-        sandy.addGrade(86);
-
-        students.put("square_pants", spongebob);
-        students.put("tentacles", squidward);
-        students.put("star", patrick);
-        students.put("cheeks", sandy);
+        String[] usernames = {"spongebob", "squidward", "patrick", "sandy", };
+        Student[] myStudents = new Student[usernames.length];
+        for (int i = 0; i < usernames.length; i++){
+            myStudents[i] = new Student(usernames[i]);
+            for (int j = 0; j < 3; j++){
+                myStudents[i].addGrade((int) (Math.random()*100) + 1);
+            }
+            students.put(usernames[i], myStudents[i]);
+        }
 
         // Commandline Interface
+        System.out.println("Welcome!");
+        while(again) {
+            promptMenu(students);
+            int menuSelect = Input.getInt();
+            if (menuSelect == 1){
+                printAllGrades(students);
+            } else if (menuSelect == 2){
+                printClassAverage(students);
+            } else if (menuSelect == 3){
+                promptUsername();
+                printStudent(students, sc.nextLine());
+            } else if (menuSelect == 4){
+                printCSV(students);
+            } else if (menuSelect == 5){
+                again = false;
+            } else {
+                System.out.println("Invalid Option...");
+            }
+        }
+        System.out.println("\nGoodbye, and have a wonderful day!");
+    }
+
+    // PROMPTS
+    public static void promptMenu(HashMap<String, Student> students){
+        System.out.print("\n\nGitHub Usernames: ");
         for ( String key : students.keySet() ) {
             System.out.printf( "|%s| ", key);
         }
+        System.out.print("\n\tMenu Options:\n\t1 - List All Grades\n\t2 - Get Class Average\n\t3 - Get Student Info\n\t4 - Print CSV Report\n\t5 - Exit\n\n");
+        System.out.print("What would you like to do?\n> ");
     }
+
+    public static void promptUsername(){
+        System.out.print("\nWhat student would you like to see more information on?\n> ");
+    }
+
+    // PRINTS
+    public static void printStudent(HashMap<String, Student> students, String username){
+        boolean isAStudent = students.containsKey(username);
+        if (isAStudent) {
+            System.out.printf("%nName: %s - GitHub Username: %s%nCurrent Average: %.1f%n", students.get(username).getName(), username, students.get(username).getGradeAverage());
+            students.get(username).printGrades();
+        }
+        else {
+            System.out.printf("%nSorry, no student found with the GitHub username of \"%s\".", username);
+        }
+    }
+
+    public static void printAllGrades(HashMap<String, Student> students){
+        for (Student student: students.values()){
+            System.out.print("\n" + student.getName() + " | ");
+            student.printGrades();
+        }
+    }
+
+    public static void printClassAverage(HashMap<String, Student> students){
+        int total = 0;
+        for (Student student: students.values()){
+            total += student.getGradeAverage();
+        }
+        System.out.printf("\nClass Average: %d", total/students.size());
+    }
+
+    public static void printCSV(HashMap<String, Student> students){
+        for (String username: students.keySet()){
+            System.out.printf("%n%s, %s, %.1f", students.get(username).getName(), username, students.get(username).getGradeAverage());
+        }
+    }
+
 }
