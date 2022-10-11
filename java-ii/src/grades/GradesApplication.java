@@ -3,6 +3,7 @@ import org.w3c.dom.ls.LSOutput;
 import util.Input;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class GradesApplication {
@@ -11,12 +12,16 @@ public class GradesApplication {
         Scanner sc = new Scanner(System.in);
         boolean again = true;
 
-        String[] usernames = {"spongebob", "squidward", "patrick", "sandy", };
+        String[] usernames = {"square_pants", "tentacles", "star", "cheeks", };
+        String[] names = {"spongebob", "squidward", "patrick", "sandy", };
         Student[] myStudents = new Student[usernames.length];
         for (int i = 0; i < usernames.length; i++){
-            myStudents[i] = new Student(usernames[i]);
+            myStudents[i] = new Student(names[i]);
             for (int j = 0; j < 3; j++){
-                myStudents[i].addGrade((int) (Math.random()*100) + 1);
+                myStudents[i].addGrade((int)(Math.random()*100) + 1);
+                String value = (Math.random() > 0.5) ? "A":"P";
+                String date = "2022-10-0" + i+1;
+                myStudents[i].recordAttendance(date, value);
             }
             students.put(usernames[i], myStudents[i]);
         }
@@ -58,15 +63,32 @@ public class GradesApplication {
         System.out.print("\nWhat student would you like to see more information on?\n> ");
     }
 
-    // PRINTS
+    public static void promptAttendance(HashMap<String, Student> students){
+        promptUsername();
+        String username = Input.getString();
+        if (isAStudent(students, username)){
+            String date, value;
+            System.out.print("\n[YYYY-DD-MM] Date: ");
+            date = Input.getString();
+            do {
+                System.out.print("\n[A/P] Absent or Present: ");
+                value = Input.getString();
+            } while(!Objects.equals(value.toLowerCase(), "a") || !Objects.equals(value.toLowerCase(), "p"));
+            students.get(username).recordAttendance(date, value);
+        }
+    }
+
+    // PRINTS / RETURNS
+    public static boolean isAStudent(HashMap<String, Student> students, String username){
+        if (!students.containsKey(username)) System.out.printf("%nSorry, no student found with the GitHub username of \"%s\".", username);
+        return students.containsKey(username);
+    }
+
     public static void printStudent(HashMap<String, Student> students, String username){
-        boolean isAStudent = students.containsKey(username);
-        if (isAStudent) {
+        if (isAStudent(students, username)) {
             System.out.printf("%nName: %s - GitHub Username: %s%nCurrent Average: %.1f%n", students.get(username).getName(), username, students.get(username).getGradeAverage());
             students.get(username).printGrades();
-        }
-        else {
-            System.out.printf("%nSorry, no student found with the GitHub username of \"%s\".", username);
+            students.get(username).printAttendance();
         }
     }
 
@@ -87,8 +109,9 @@ public class GradesApplication {
 
     public static void printCSV(HashMap<String, Student> students){
         for (String username: students.keySet()){
-            System.out.printf("%n%s, %s, %.1f", students.get(username).getName(), username, students.get(username).getGradeAverage());
+            Student student = students.get(username);
+            System.out.printf("%n%s, %s, %.1f, ", student.getName(), username, student.getGradeAverage());
+            student.printAttendance();
         }
     }
-
 }

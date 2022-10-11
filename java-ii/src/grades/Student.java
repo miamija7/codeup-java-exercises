@@ -1,15 +1,19 @@
 package grades;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Student {
     // Variables/Fields
     private String name;
     ArrayList<Integer> grades;
+    HashMap<String, String> attendance;
 
     // Constructor
     public Student(String name) {
         this.name = name;
         this.grades = new ArrayList<>();
+        this.attendance = new HashMap<>();
     }
 
     // Methods
@@ -32,6 +36,11 @@ public class Student {
             System.out.print(grade + " ");
         }
     }
+    public void recordAttendance(String date, String value) {
+        this.attendance.put(date, value.toUpperCase());
+    }
 
-
+    public void printAttendance() {
+        System.out.print("\nAttendance: " + this.attendance);
+    }
 }
