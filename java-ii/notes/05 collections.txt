@@ -1,0 +1,54 @@
+
+*** JAVA II - Collections ***
+
+Collections we will talk about: ArrayList and HashMap
+
+
+Collection:
+- a data structure that can be used to group, or collect, objects
+- Java standard library: a collection of code that comes with Java, contains collections
+- java.util package has collection classes
+
+
+Array Lists:
+- represents an array that can change its size
+- elements must all be objects, and same type
+- ArrayList is like a wrapper around an array that handles resizing for you
+- they have methods that handle common array operations
+
+SYNTAX: ArrayList<String> roasts = new ArrayList<>();
+
+Method	        Description
+.size	        returns the number of elements in the array
+.add	        add an element to the collection (optionally) at a specified index
+.get	        return the element at the specified index
+.indexOf        return the first found index of the given item, or -1 if not found
+.contains	    check if a collection contains a given element
+.lastIndexOf	find the last index of the given element, -1 if not found
+.isEmpty	    check if the list is empty
+.remove	        remove the first occurrence of an item, or an item at a given index
+
+NOTE:
+- specify type in collection with <>
+- must contain objects, we specify Integer instead of int
+- add method is overloaded
+- no length property, use .size()
+- collections all have toString methods on them
+- return value of .remove depends on how it is invoked (index returns element, object returns boolean)
+
+
+
+Hash Maps:
+- data structure for key-value pairs
+- ALL the keys in the hash map must be of the same type
+- ALL the values must be of the same type
+- BUT keys and the values don't necessarily have to be the same type
+
+SYNTAX: HashMap<String, String> usernames = new HashMap<>();
+
+Method	            Description
+.put	            set a key-value pair
+.get	            return the value associated with the given key, or null
+.getOrDefault	    like .get, but with a defined value instead of null
+.containsKey	    check if a key exists in the map
+.containsValue	    check if a value exists in the map
