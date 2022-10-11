@@ -19,9 +19,7 @@ public class GradesApplication {
             myStudents[i] = new Student(names[i]);
             for (int j = 0; j < 3; j++){
                 myStudents[i].addGrade((int)(Math.random()*100) + 1);
-                String value = (Math.random() > 0.5) ? "A":"P";
-                String date = "2022-10-0" + i+1;
-                myStudents[i].recordAttendance(date, value);
+                myStudents[i].recordAttendance("2022-10-0" + i+1, (Math.random() > 0.5) ? "A":"P");
             }
             students.put(usernames[i], myStudents[i]);
         }
