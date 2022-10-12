@@ -2,11 +2,11 @@ package groceries;
 
 import util.Input;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GroceryStore {
     // Variables
     private ArrayList<Grocery> cart;
-    private ArrayList<Grocery> sorted;
     private String[] categories = {"Beverages", "Bread/Bakery", "Canned/Jarred Goods", "Dairy", "Dry/Baking Goods", "Frozen Foods", "Meat", "Produce", "Cleaners", "Paper Goods", "Personal Care", "Other"};
 
     // Constructor
@@ -49,17 +49,21 @@ public class GroceryStore {
         Input.clear();
         boolean stillShopping = Input.yesNo();
         if(!stillShopping) {
-            cart.sort((g1, g2) -> g1.getName().compareTo(g2.getName()));
+            sortAlpha(cart);
+            sortCategory(cart);
             for(Grocery grocery : cart){
-                System.out.printf("%nCategory: %-20s | Name: %-20s | Quantity: %d", grocery.getCategory(), grocery.getName(), grocery.getQuantity());
-            }
-            sorted = cart;
-            sorted.sort((g1, g2) -> g1.getCategory().compareTo(g2.getCategory()));
-            for(Grocery grocery : sorted){
                 System.out.printf("%nCategory: %-20s | Name: %-20s | Quantity: %d", grocery.getCategory(), grocery.getName(), grocery.getQuantity());
             }
         }
         return stillShopping;
+    }
+
+    private void sortAlpha(ArrayList<Grocery> cart) {
+        cart.sort((g1, g2) -> g1.getName().compareTo(g2.getName()));
+    }
+
+    private void sortCategory(ArrayList<Grocery> cart) {
+        cart.sort((g1, g2) -> g1.getCategory().compareTo(g2.getCategory()));
     }
 
 }
