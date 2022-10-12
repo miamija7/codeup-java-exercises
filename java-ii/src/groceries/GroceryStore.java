@@ -65,5 +65,4 @@ public class GroceryStore {
     private void sortCategory(ArrayList<Grocery> cart) {
         cart.sort((g1, g2) -> g1.getCategory().compareTo(g2.getCategory()));
     }
-
 }
