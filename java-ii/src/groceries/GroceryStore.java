@@ -1,5 +1,4 @@
 package groceries;
-
 import util.Input;
 import java.util.ArrayList;
 import java.util.Collections;
