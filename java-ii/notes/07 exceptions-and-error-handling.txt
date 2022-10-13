@@ -86,8 +86,57 @@ The 'e' Object:
 
 
 Types of Exceptions:
-- exceptions are divided into two main categories: checked and unchecked
+- exceptions are divided into TWO main categories: checked and unchecked (third category: error)
 - unchecked: mostly exceptions that are built into the Java language, and do not need to be explicitly dealt with
 - checked: must be handled in our code, either with a try-catch, or by declaring them in the method signature
 - checked: enforced by the compiler, if a checked exception is not handled, the code will not compile
+- error: represents something going very wrong, not something that we can anticipate or handle in our code
+
+    1. Exception
+       - Errors our code should prepare for.
+       - Generally, any custom exceptions we create will subclass Exception.
+       - For example: FileNotFoundException, or SQLException.
+    2. RuntimeException
+       - Things that can go wrong, but that we can usually prevent programmatically.
+       - ArrayIndexOutOfBoundsException, NullPointerException, and IllegalArgumentException are all examples
+         of runtime exceptions.
+    3. Error
+       - A serious problem.
+       - Usually occurs at the OS or JVM level.
+       - OutOfMemoryError, or StackOverflowError.
+
+
+Working with Checked Exceptions:
+
+    public static String getIndentationPreference() throws Exception {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("What type of indentation do you prefer?");
+        String indentationPreference = sc.nextLine();
+
+        if (indentationPreference.equals("tabs")) {
+            throw new Exception("Spaces are superior!");
+        }
+
+        return indentationPreference;
+    }
+
+    // try/catch
+    public static void main(String[] args) {
+        String indentationPreference;
+
+        try {
+            indentationPreference = getIndentationPreference();
+            System.out.println("Okay, " + indentationPreference + " is a great choice.");
+        } catch (Exception e) {
+            System.out.println("Uh oh, something went wrong: " + e.getMessage());
+            System.out.println("Here is some more detail:");
+            e.printStackTrace();
+        }
+    }
+
+    // adding exception to method signature
+    public static void main(String[] args) throws Exception {
+        String indentationPreference = getIndentationPreference();
+        System.out.println("Okay, " + indentationPreference + " is a great choice.");
+    }
 
