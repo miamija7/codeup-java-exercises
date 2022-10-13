@@ -10,7 +10,6 @@ public final class Input {
     // Methods
     public static String getString(String... prompt){
         if (prompt.length > 0) { System.out.print("Gimme a string: "); }
-        scanner.nextLine();
         return scanner.nextLine();
     }
 
@@ -30,7 +29,12 @@ public final class Input {
 
     public static int getInt(String... prompt) {
         if (prompt.length > 0) { System.out.print("Gimme an integer: "); }
-        return scanner.nextInt();
+        try{
+            return Integer.parseInt(getString());
+        } catch (NumberFormatException e) {
+            System.out.println("That wasn't a number...");
+            return (prompt.length > 0) ? getInt("prompt") : getInt();
+        }
     }
 
     public static double getDouble(double min, double max, String... prompt) {
@@ -44,7 +48,12 @@ public final class Input {
 
     public static double getDouble(String... prompt) {
         if (prompt.length > 0) { System.out.print("Gimme a double: "); }
-        return scanner.nextDouble();
+        try{
+            return Double.parseDouble(getString());
+        } catch (NumberFormatException e) {
+            System.out.println("That wasn't a double...");
+            return (prompt.length > 0) ? getDouble("prompt") : getDouble();
+        }
     }
 
     public static void clear() {
