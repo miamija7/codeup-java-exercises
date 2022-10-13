@@ -1,0 +1,93 @@
+
+*** JAVA II - Exceptions and error handling ***
+
+FOCUS: How to handle errors in Java.
+TOPICS: Different types of exceptions, when and how to use them, and how to create custom exceptions.
+
+
+Throwing Exceptions:
+- formal error handling
+- exceptions are an instance of an exception class
+- you can create an exception class by extending one of the built-in exception classes
+- exceptions generally contain a message that describes what went wrong
+- an exception is thrown when the application can't perform an operation
+
+    int[] numbers = {1, 2, 3};
+    System.out.println(numbers[999]);
+    // an ArrayIndexOutOfBounds exception will be thrown
+    // exception message: the index that is out of bounds, 999
+
+- exceptions effect the control flow of your application
+- once thrown, no code after will be executed until the exception is handled
+
+    throw new Exception("Something bad happened!");
+    System.out.println("after the throw statement");
+    // will cause the application to crash when the exception is thrown
+
+
+
+Throw our own exceptions:
+- the exception was thrown for us by the Java language's array implementation
+- we can also explicitly throw our own exception
+
+    throw new Exception("Something bad happened!");
+    // causes an exception
+
+
+
+Catching Exceptions:
+- handle exceptions by catching
+- try-catch block consists of two parts:
+    1. try: the code that is going to be tried; code that could potentially cause an exception
+    2. catch: code that handles any exceptions (if produced)
+- try-catch must define the type of exception
+
+    // FORMAT
+    try {
+        // something that
+        // might go wrong
+    } catch (Exception e) {
+        // handle the error
+    }
+
+    // EXAMPLE OF TRY/CATCH
+    try {
+        System.out.println("Let's see...");
+        int result = 1 / 0;
+        System.out.println("I can divide by zero!");
+    } catch (ArithmeticException e) {
+        System.out.println("Math still works!");
+    }
+
+    // EXAMPLE OF TRY/CATCH MULTIPLE
+    int[] numbers = {1, 2, 3};
+    int x;
+
+    try {
+        x = numbers[100];
+    } catch (ArrayIndexOutOfBoundsException e) {
+        System.out.println("Caught an array index exception!");
+    } catch (Exception e) {
+        System.out.println("Caught a generic exception!");
+    } finally {
+        System.out.println("This will always run.");
+    }
+
+NOTE:   Try-Catch Scope
+        A try-catch block is a code block just like a body of an if statement, or the body of a while loop is.
+        Because of the way block scope works in Java, variables declared inside a try or catch block only exist
+        in that block. If you need to do assignment inside a try-catch, declare the variables outside the block,
+        and assign to them inside the block.
+
+
+The 'e' Object:
+.getMessage             returns the exception message as a string
+.printStackTrace        prints the full details of the exception (where it occurred) to the console
+
+
+Types of Exceptions:
+- exceptions are divided into two main categories: checked and unchecked
+- unchecked: mostly exceptions that are built into the Java language, and do not need to be explicitly dealt with
+- checked: must be handled in our code, either with a try-catch, or by declaring them in the method signature
+- checked: enforced by the compiler, if a checked exception is not handled, the code will not compile
+
