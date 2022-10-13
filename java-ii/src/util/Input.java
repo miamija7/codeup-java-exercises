@@ -22,7 +22,7 @@ public final class Input {
         int userInput;
         do  {
             if (prompt.length > 0) { System.out.print("Gimme an integer between " + min + " and " + max + ": "); }
-            userInput = scanner.nextInt();
+            userInput = getInt();
         } while (userInput > max || userInput < min);
         return userInput;
     }
@@ -41,7 +41,7 @@ public final class Input {
         double userInput;
         do  {
             if (prompt.length > 0) { System.out.print("Gimme a double between " + min + " and " + max + ": "); }
-            userInput = scanner.nextDouble();
+            userInput = getDouble();
         } while (userInput > max || userInput < min);
         return userInput;
     }
