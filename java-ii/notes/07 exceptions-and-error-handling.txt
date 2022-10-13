@@ -140,3 +140,36 @@ Working with Checked Exceptions:
         System.out.println("Okay, " + indentationPreference + " is a great choice.");
     }
 
+
+Custom Exceptions:
+- we can create our own application-specific exceptions
+- by extending the Exception class
+- exceptions are just objects
+- we can store them in a variable, declare, and initialize them just like any other object
+
+    class WrongIndentationTypeException extends Exception {}
+
+    Scanner sc = new Scanner(System.in);
+    System.out.print("What type of indentation do you prefer?");
+    String indentationPreference = sc.nextLine();
+    if (indentationPreference.equals("tabs")) {
+        WrongIndentationTypeException e;
+        e = new WrongIndentationTypeException("Spaces are superior!");
+        throw e;
+    }
+
+NOTE: Good Error Messages
+      In general, exception messages should be helpful and descriptive of the problem that caused the exception,
+      unlike the example above. A better message might look like:
+      | Error when getting user indentation preference.
+      | Input was "tabs", was expecting "spaces".
+
+NOTE: Exceptions Best Practices
+      Most likely you will be handling existing exceptions in the language than creating your own, so this
+      previous section it's more about exposure. Remember to write clear sentences and include ending punctuation.
+      Each sentence in the String assigned to the exception message should end in a period. For example, "The log
+      table has overflowed." would be an appropriate message string.
+
+- very common to see custom exception classes that extend from Exception
+- don't provide any additional functionality over the base Exception class
+- simply expresses that there are errors specific to our app that we wish to treat differently than other exceptions
