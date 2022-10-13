@@ -10,5 +10,8 @@ public class InputTest {
 //        System.out.println(Input.getDouble("prompt"));
 
         System.out.println(Input.getInt("prompt"));
+        System.out.println(Input.getDouble("prompt"));
+        System.out.println(Input.getInt(1, 10, "prompt"));
+        System.out.println(Input.getDouble(1.0, 10, "prompt"));
     }
 }

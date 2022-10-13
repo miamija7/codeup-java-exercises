@@ -4,7 +4,7 @@ import java.util.Scanner;
 public final class Input {
 
     // Variables/Fields
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
 
     // Methods
@@ -20,11 +20,15 @@ public final class Input {
 
     public static int getInt(int min, int max, String... prompt) {
         int userInput;
-        do  {
+        try {
             if (prompt.length > 0) { System.out.print("Gimme an integer between " + min + " and " + max + ": "); }
             userInput = getInt();
-        } while (userInput > max || userInput < min);
-        return userInput;
+            if (userInput > max || userInput < min) { throw new NotInRangeException(); }
+            return userInput;
+        } catch (NotInRangeException e) {
+            System.out.println("That wasn't in range...");
+            return (prompt.length > 0)? getInt(min, max, "prompt") : getInt(min, max);
+        }
     }
 
     public static int getInt(String... prompt) {
@@ -33,17 +37,21 @@ public final class Input {
             return Integer.parseInt(getString());
         } catch (NumberFormatException e) {
             System.out.println("That wasn't a number...");
-            return (prompt.length > 0) ? getInt("prompt") : getInt();
+            return getInt("prompt");
         }
     }
 
     public static double getDouble(double min, double max, String... prompt) {
         double userInput;
-        do  {
+        try {
             if (prompt.length > 0) { System.out.print("Gimme a double between " + min + " and " + max + ": "); }
             userInput = getDouble();
-        } while (userInput > max || userInput < min);
-        return userInput;
+            if (userInput > max || userInput < min) { throw new NotInRangeException(); }
+            return userInput;
+        } catch (NotInRangeException e) {
+            System.out.println("That wasn't in range...");
+            return (prompt.length > 0)? getDouble(min, max, "prompt") : getDouble(min, max);
+        }
     }
 
     public static double getDouble(String... prompt) {
@@ -51,12 +59,15 @@ public final class Input {
         try{
             return Double.parseDouble(getString());
         } catch (NumberFormatException e) {
-            System.out.println("That wasn't a double...");
-            return (prompt.length > 0) ? getDouble("prompt") : getDouble();
+            System.out.println("That wasn't a number...");
+            return getDouble("prompt");
         }
     }
 
     public static void clear() {
         scanner.nextLine();
     }
+
+    // Custom Exception
+    static class NotInRangeException extends Exception {}
 }
