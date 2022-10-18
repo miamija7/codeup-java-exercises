@@ -1,3 +1,135 @@
 
 *** JAVA II - File IO ***
 
+Context and definitions:
+- a file is a discrete container for data on a storage device
+- a path is the location of a file in a filesystem
+
+
+Absolute vs Relative Paths:
+- absolute paths: specified from the filesystem root (unambiguously)
+- relative paths: relative to the current working directory (current working directory)
+
+
+Working With Files:
+- Java standard library packages: java.io and java.nio (new)
+- three classes and one interface we'll be working with and common methods on them
+
+    1. Paths
+        The Path Interface
+
+        Defines an object that represents a filepath
+        Many file operations will expect to be passed an argument of type Path
+        Abstracts away differences between different filesystem paths (Windows vs MacOS)
+        Paths class
+
+        Contains static methods for obtaining file paths
+        Can be used to obtain objects that implement Path
+
+    2. Files
+        File class
+
+        Object that represents a file
+        Files class
+
+        Contains static methods for manipulating files
+
+
+
+Common Path and File Methods:
+- current working directory: when your code runs, the current working directory will be the root of your project
+
+    ALERT:  IOException
+            Most of the methods we'll discuss for file IO can throw an IOException; you will need to handle
+            this in your application. For the sake of easy demonstration, the error handling code is omitted
+            from the examples in this lesson, but you can assume that the method the examples are inside
+            contains throws IOException in the method signature.
+
+    // Return a Path
+    Path Paths.get(String filename)
+    Path Paths.get(String directory, String filename)
+    Path Paths.get(String parentDir, String childDir, String filename)
+
+    // Tests for existence
+    boolean Files.exists(Path filepath)
+    boolean Files.notExists(Path filepath)
+
+    // Create an empty file
+    Path Files.createFile(Path path)
+
+    // Create a directory or multiple directories
+    Path Files.createDirectories(Path path)
+
+
+
+    // EXAMPLE: using a relative path to create a directory and file if they do not yet exist:
+    String directory = "data";
+    String filename = "info.txt";
+
+    Path dataDirectory = Paths.get(directory);
+    Path dataFile = Paths.get(directory, filename);
+
+    if (Files.notExists(dataDirectory)) {
+        Files.createDirectories(dataDirectory);
+    }
+
+    if (! Files.exists(dataFile)) {
+        Files.createFile(dataFile);
+    }
+
+    NOTE:   Notice that we pass multiple arguments to Paths.get. This way we can just specify the directory
+            name and not the directory separator, which is different for different operating systems. If you
+            are writing code that needs to work cross-platform, be sure to pass each directory name as a
+            separate string argument.
+
+
+
+Reading And Writing Files:
+- Write a list of strings to a file:
+
+    Path Files.write(Path filepath, List<String> lines[, StandardOpenOption option])
+
+    + Each string in the lines parameter will become one line in the file
+    + Default is to overwrite the existing file (or create a new one)
+    + The last argument is optional
+    + StandardOpenOption.APPEND can be used as the last argument to add to an existing file
+
+- Read the contents of a file:
+
+    List<String> Files.readAllLines(Path filepath)
+
+    + Transforms each line in the file into a string
+    + Each element of the returned list is a string (one line from the file)
+
+- EXAMPLE: create a list and write its contents to a file:
+
+    List<String> groceryList = Arrays.asList("coffee", "milk", "sugar");
+    Path filepath = Paths.get("data", "groceries.txt");
+    Files.write(filepath, groceryList);
+
+    // data/groceries.txt content
+    coffee
+    milk
+    sugar
+
+
+
+
+    ***
+    ----> Show current directory <----
+    String curDir = System.getProperty("user.dir")
+    System.out.println(curDir)
+
+    ----> Setup for creating directories & files <----
+    String directory = curDir + "/MyData/data";
+    String filename = "info.txt";
+    Path dataDirectory = Paths.get(directory);
+    Path dataFile - Paths.get(directory, filename);
+
+    ----> Creating directories & files <----
+    Files.createDirectories(dataDirectory)
+    Files.createFile(dataFile);
+
+    ----> Deleting empty directories <----
+    Files.delete(dataDirectory);
+    ***
