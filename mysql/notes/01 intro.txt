@@ -3,6 +3,7 @@
 
 [EXPERIENCE TRANSLATION: relational databases and the SQL query language]
 
+>>>>>> GUI: MySQL Workbench <<<<<<<
 
 ===================== EXERCISE =====================
 mySQL

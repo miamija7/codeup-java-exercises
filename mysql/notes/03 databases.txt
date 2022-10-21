@@ -44,3 +44,13 @@ https://dev.mysql.com/doc/mysqld-version-reference/en/keywords-8-0.html
 Quoting Identifiers:
 ``          using any word for a database name, or space characters (DO NOT DO...)
 
+
+
+===================== EXERCISE =====================
+CREATE DATABASE testing1234;
+SHOW DATABASES;
+SHOW CREATE DATABASE testing1234;
+DROP DATABASE testing1234;
+SHOW DATABASES;
+CREATE DATABASE codeup_test_db;
+CREATE USER 'codeup_test_user'@'localhost' IDENTIFIED BY 'password';

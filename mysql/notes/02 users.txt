@@ -57,7 +57,7 @@ mySQL
 
 > SHOW GRANTS for 'root'@'hostname';
 > SHOW GRANTS for 'root'@'hostname'\G
-> CREATE USER 'chicken'@'localhost' IDENTIFIED BY 'P@$$w0rd';
+> CREATE USER 'chicken'@'localhost' IDENTIFIED BY 'pwd';
 > SELECT user, host FROM mysql.user;
 > DROP USER 'chicken'@'localhost';
 > CREATE USER 'miaevans'@'localhost' IDENTIFIED BY 'pwd';
