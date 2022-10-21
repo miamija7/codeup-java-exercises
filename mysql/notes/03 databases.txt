@@ -54,3 +54,4 @@ DROP DATABASE testing1234;
 SHOW DATABASES;
 CREATE DATABASE codeup_test_db;
 CREATE USER 'codeup_test_user'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL ON  codeup_test_db TO 'codeup_test_user'@'localhost';
