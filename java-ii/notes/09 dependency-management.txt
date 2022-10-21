@@ -1,0 +1,16 @@
+
+*** JAVA II - DEPENDENCY MANAGEMENT ***
+
+JAR Files:
+- A JAR file is a JavaARchive file
+- JAR files are a zipped directory that contains all the files an app needs to run, or all the classes in a library
+- (usually compiled .class files)
+- JAR files compress a project to a single file
+- a good strategy for distributing applications and libraries
+
+- specify a main class, to make our JAR file runnable
+-
+
+
+
+
