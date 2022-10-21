@@ -17,6 +17,7 @@ DROP DATABASE IF EXISTS database_name;              remove a database if it exis
 RDBMS:
 - Relational Database Management Systems
 
+
 Database vs. Schema:
 - RDBMSs use schemas as a second level of organization within databases
 - they strictly separate databases from each other from the user's perspective
