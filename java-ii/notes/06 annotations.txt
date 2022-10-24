@@ -1,0 +1,51 @@
+
+
+
+- Annotations provide metadata for Java code
+-  @ character signals to the compiler that this is an annotation
+- following the @ character is the name of the annotation
+
+    @Entity
+
+- annotation can also have elements for which you can set values
+
+    @Entity(table = "vehicles")
+    @Entity(tableName = "vehicles", primaryKey = "id")
+    @TextTransformation(value = "uppercase")
+    @TextTransformation("uppercase")
+
+
+
+Placement:
+- You can place Java annotations above:
+    + classes.
+    + interfaces.
+    + fields.
+    + local variables.
+
+    @Entity // annotating a class
+    public class Product {
+        @Persistent // annotating a property
+        protected String name = null;
+
+        @Getter // annotation a method
+        public String getName() {
+            return name;
+        }
+
+        // annotating a parameter
+        public void setName(@Optional name) {
+            this.name = name;
+        }
+
+        public List addToCart(List cart) {
+            @Optional // annotating a local variable
+            List localCart = cart == null ? new ArrayList() : cart;
+            localCart.add(getName());
+            return localCart;
+        }
+    }
+
+
+Built-In Annotations:
+
