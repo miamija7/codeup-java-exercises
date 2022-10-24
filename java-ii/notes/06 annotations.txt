@@ -1,4 +1,5 @@
 
+*** JAVA II - Annotations ***
 
 
 - Annotations provide metadata for Java code
@@ -47,5 +48,74 @@ Placement:
     }
 
 
-Built-In Annotations:
 
+Built-In Annotations:
+- Java annotations are classified in 2 main groups:
+    1. Compile-time annotations.
+    2. Run-time annotations.
+- Java comes with three compile-time annotations which are used to give the compiler instructions
+    @Deprecated
+    @Override
+    @SuppressWarnings
+
+
+
+@Deprecated
+- The @Deprecated annotation is used to indicate that a class, method, or field should no longer be used
+- If that class, method, or field is used, the compiler will give you a warning when the code is compiled
+- Most IDEs will also show a visual indication of this in some form or fashion
+
+    @Deprecated
+    public class MyComponent {
+    }
+
+
+@Override
+- The @Override annotation is used above methods that are intended to override a method in a superclass
+- If the method does not match a method in the superclass, the compiler will give you an error
+- This annotation is not necessary in order to override a method in a superclass
+- it is considered good practice to include it
+
+    // error because the alterEgo method has the @Override annotation, but it is not overriding
+    // a method from its superclass, Person.
+    class Person {
+        public String fullName() {
+            // ...
+        }
+    }
+    class SuperHero extends Person {
+        @Override
+        public String alterEgo () {
+            // ...
+        }
+    }
+
+
+
+@SuppressWarnings
+- makes the compiler suppress warnings for a given method
+- if a method makes an unchecked type cast, the compiler may generate a warning
+
+    // returning a List<String>, but the actual return value is just a generic ArrayList (<String> is not specified)
+    // warning about unchecked types will occur
+    @SuppressWarnings("unchecked")
+    public List<String> languages() {
+        return new ArrayList();
+    }
+
+    NOTE: Unchecked type cast operations
+    In general, you should always specify types whenever possible when using Java's collections. Sometimes
+    situations arise where this is not possible, and we can't specify the type ahead of time. This is the scenario
+    @SuppressWarnings was created for.
+
+- There's a predefined set of valid values for the @SupressWarning annotation. The most common are:
+    + all to suppress all warnings
+    + unchecked to suppress warnings relative to unchecked operations
+    + deprecation to suppress warnings relative to deprecation
+------------------------------------------------------------------------
+        @SuppressWarnings({"deprecation", "unchecked"})
+
+- suppress more than one type of warning you can use the array initializer notation to specify the value for the
+  annotation element
+- If this annotation was present on a class, the compiler would not warn us about any deprecated methods
+  we are using, and would also not warn us about unchecked type operations.
