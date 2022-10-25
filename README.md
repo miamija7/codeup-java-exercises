@@ -9,3 +9,7 @@ This is a collection of personal Java exercises and scratch notes. I'm a member 
 
 ## Related Repositories
 [Codeup Web Exercises](https://github.com/miamija7/codeup-web-exercises)
+
+[Maven Exercises](https://github.com/miamija7/maven-exercises)
+
+[Database Exercises](https://github.com/miamija7/database-exercises)
