@@ -8,8 +8,12 @@ This is a collection of personal Java exercises and scratch notes. I'm a member 
 - Java III
 
 ## Related Repositories
+
 [Codeup Web Exercises](https://github.com/miamija7/codeup-web-exercises)
 
-[Maven Exercises](https://github.com/miamija7/maven-exercises)
+[Codeup Maven Exercises](https://github.com/miamija7/maven-exercises)
 
-[Database Exercises](https://github.com/miamija7/database-exercises)
+[Codeup JUnit Exercises](https://github.com/miamija7/junit-tests)
+
+[Codeup Database Exercises](https://github.com/miamija7/database-exercises)
+
