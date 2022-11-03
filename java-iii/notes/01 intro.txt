@@ -1,2 +1,31 @@
 
 *** JAVA III - INTRO ***
+
+We will now learn about how we can use Java to interact with the web, and eventually build full-stack web applications.
+
+Throughout this module, we will be building the AdLister project. The AdLister project is essentially a bare bones Craigslist clone. It will have the following features:
+
+Users can view all the ads that have been posted
+An ad has a title, a description, and a link to the user that posted it
+Users can register for the site
+Users can log in to the application
+Logged in users can create ads with a title and description
+There is much more you will be able to add to the application, and the description above is far from a complete application, but over the course of the next few lessons, we will build out the described functionality.
+
+By the end of this module, you should be able to:
+
+Use Java to dynamically generate html pages
+Use Java to interact with a MySQL database
+Understand:
+
+The Model-View-Controller Paradigm
+The request-response lifecycle of HTTP requests
+How the dependencies of a project are managed with Maven
+Know How To:
+
+Create servlets that are mapped to a URI
+Use JSPs and the JSTL to generate html pages
+Establish database connections and use connections to execute queries
+Use prepared statements to avoid SQL injection
+Escape user input when shown as HTML
+Properly handle user's passwords
