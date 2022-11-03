@@ -1,0 +1,142 @@
+
+*** JAVA III - SERVLETS ***
+
+
+How The Internet Works:
+                                  ##########
+                  +--------<----- # Server # <-------------+
+                  |               ##########               |
+                  |                                        |
+                  v                 (Java)                 ^
+                  |                                        |
+      Response    |                                        |  Request
+                  |                                        |
+     +----------+ |                                        | +------------+
+     | 200 OK   | |                                        | | GET /hello |
+     +----------+ v                                        ^ +------------+
+     | <html>   | |                                        |
+     |  ...     | |                                        |
+     | </html>  | |                                        |
+     +----------+ |                                        |
+                  |                                        |
+                  v                                        ^
+                  |                                        |
+                  |                                        |
+                  |               ##########               |
+                  +-------------> # Client # --------->----+
+                                  ##########
+
+                                 (JavaScript)
+                                  (browser)
+
+
+
+- communication consists of requests and responses
+- all of our Java code will reside server-side
+- opposed to client-side, which is where our JavaScript runs
+- user will not know that our server is running Java
+- the end result of the code running on our server should be a valid HTML document
+
+
+Servlets:
+- A servlet is a Java class
+- it extends the HttpServlet class
+- it handles HTTP requests and responses
+- allows us to create dynamic web pages with Java (create HTML responses)
+
+
+Using Servlets:
+- You will need:
+    1. The servlet libraries
+    2. A Web Server that will interact our servlet classes
+    3. servlet dependencies within our pom.xml
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+
+
+Tomcat:
+- Apache Tomcat
+- it is our servlet container
+- Tomcat is the piece of software that handles the lower level networking details of HTTP requests
+- Tomcat expects our application to be deployed as a WAR (Web ARchive).
+- This is a JAR file with additional structure.
+
+
+WAR File:
+- a WAR file is an artifact, a byproduct of our source code, but not the source code itself
+- a WAR file is a file used to distribute a collection of JAR-files, JavaServer Pages, Java Servlets, Java classes,
+  XML files, tag libraries, static web pages and other resources that together constitute a web application.
+   | ./               <------- root directory (my-application.war)
+   |     index.html   <------+
+   |     hello.jsp    <------+
+   |     css/         <------|---- static assets + jsp
+   |     js/          <------+
+   |     WEB-INF/
+   |         web.xml  <----------- configuration
+   |         lib/     <----------- external dependencies
+   |         classes/ <----------- your compiled classes
+
+- a typical Maven project structure / our structure
+    | ./               <-- project root
+    | pom.xml
+    | src/main/
+    |     java/        <-- your classes, including servlets, go here
+    |     webapp/      <-- web *facet* | static files / assets and jsps go in here
+    |         css/
+    |         js/
+    |         img/
+    |         WEB-INF/ <-- non-public files go here
+
+
+
+Configure IntelliJ:
+- in addition to this project structure, we will need to configure IntelliJ to run our project
+- IntelliJ Servlet Application Setup
+    1. General Setup
+        If you cloned the project, you will need to:
+            1. Set the project SDK:
+                a. File -> Project Structure
+                b. For "Project SDK", choose the version of Java you are using
+            2. Add the pom.xml as a Maven project
+                a. Right click on the pom.xml
+                b. Select "Add as Maven Project" (you'll see an "m" icon to the left of the pom.xml)
+            3. Mark the src/main/java directory as sources root
+                a. Right click on the java directory
+                b. Select "Mark Directory as..."
+                c. Select "Sources Root"
+
+    2. Run Configuration
+        Tell IntelliJ about tomcat (do once per computer)
+
+            1. In Intellij, Run -> Edit Configurations...
+            2. Create a new configuration (click the +) -- "Tomcat - local"
+            3. For the "Name", enter a description of your project, for example, "Adlister Server"
+            4. Next to "Application Server", click configure
+            5. In the dialog that opens, you will need to provide IntelliJ with the path to your local tomcat install.
+               If you installed tomcat with brew (if you ran the Codeup setup script you did), the path to tomcat:
+                   | Intel: /usr/local/Cellar/tomcat/x.x.x/libexec/
+                   | M1 Chip: /opt/homebrew/Cellar/tomcat@9
+                   | Get your tomcat version: ls /usr/local/Cellar/tomcat ls /opt/homebrew/Cellar/tomcat@9
+
+        If you've already configured tomcat:
+
+            1. Run -> Edit Configurations...
+            2. Create a new configuration (click the +) -- "Tomcat - local"
+            3. Choose a name that describes your project
+            4. For "Application Server", choose the version of tomcat you setup previously
+
+    3. Configure a war to be deployed
+        Under the tomcat run configuration you just created:
+
+            1. At the bottom of the dialog under "Before launch:"
+            2. Choose "Build Artifacts"
+            3. Check the name of your project + :war exploded
+            4. Check under the deployment tab, at the bottom find the input Application context the value there should be just /
+
+    :) **** The application will be available at http://localhost:8080 ****
+
+
