@@ -1,6 +1,15 @@
 
 *** JAVA III - INTRO ***
 
+***************************************
+**                                  **
+**      ALL EXERCISES LIVE IN       **
+**          JAVA-ADLISTER           **
+**            BRANCHES              **
+**                                  **
+***************************************
+
+
 We will now learn about how we can use Java to interact with the web, and eventually build full-stack web applications.
 
 Throughout this module, we will be building the AdLister project. The AdLister project is essentially a bare bones Craigslist clone. It will have the following features:
