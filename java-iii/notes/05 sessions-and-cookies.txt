@@ -1,0 +1,52 @@
+
+*** JAVA III - SERVLETS ***
+
+
+request.getSession()	                    Obtain the current session object
+session.getAttribute("attributeName")	    Retrieve a value from the session
+session.setAttribute("name", value)	        Set a value in the session
+session.removeAttribute("name")	            Remove an attribute from the session
+session.invalidate()	                    Destroy and regenerate the entire session
+
+
+
+// store information about whether the user is an admin in the session inside of LoginServlet.java
+protected void doPost(HttpServletRequest request, HttpServletResponse repsonse) {
+    // figure out if the login attempt was good...
+    // ...
+    if (isAdmin) {
+        request.getSession().setAttribute("isAdmin", true);
+    }
+    // ...
+}
+
+
+// Inside of ShowAdminDashboardServlet.java:
+protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    // redirect if the user is not an admin
+    // cast to a boolean data type to properly compare
+    if ((boolean)request.getSession().getAttribute("isAdmin") == false) {
+        response.sendRedirect("/login");
+        return;
+    }
+    request.getRequestDispatcher("/secret-admin-page.jsp").forward(request, response);
+}
+
+
+// put our JSP files inside the WEB-INF directory inside webapp and .jsp files will not be accessible outside our application
+src/main/
+    java/
+        LoginServlet.java
+        ShowAdminDashboardServlet.java
+    webapp/
+        css/
+            style.css
+        WEB-INF/
+            index.jsp
+            login.jsp
+            secret-admin-page.jsp
+
+
+
+// update getRequestDispatcher calls in Servlets
+request.getRequestDispatcher("/WEB-INF/secret-admin-page.jsp").forward(request, response);
