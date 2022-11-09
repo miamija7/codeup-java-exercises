@@ -1,0 +1,166 @@
+
+~~~~~~~~~~~~~~~~~~~~~~ FULL EXAMPLE (MVC) / "Products" ~~~~~~~~~~~~~~~~~~~~~~
+
+===== "Products" OVERVIEW =====
+
+Data Interaction Classes:
+- Product.java: our Model
+- Products.java: the DAO interface
+- ListProducts.java: the DAO implementation
+- DaoFactory.java: the class that provides access to our DAOs
+
+Viewing Products:
+- ShowProductsServlet.java: The servlet/controller
+- products/index.jsp: the view
+
+Creating Products:
+- CreateProductServlet.java: the controller
+
+
+
+
+===== "Products" EXAMPLE ======
+
+    -----> (M) Model : Product.java <-----
+    public class Product {
+        private String name;
+        private double price;
+
+        public Product() {}
+        public Product(String name, double price) {
+            this.name = name;
+            this.price = price;
+        }
+        // getters and setters...
+    }
+
+
+    -----> DAO interface : Products.java <-----
+    interface Products {
+        List<Product> all(); // get all the product records
+        void insert(Product product); // persist new product to the database
+    }
+
+
+    -----> DAO implementation : ListProducts.java <-----
+    class ListProducts implements Products {
+        private List<Product> products = new ArrayList();
+
+        // When an instance of this class is created, we'll populate the
+        // products array list with data, "faking" the records
+        public ListProducts() {
+            insert(new Product("hammer", 9.99));
+            insert(new Product("screwdriver", 9.99));
+            insert(new Product("drill", 19.99));
+        }
+
+        // Persist a new record. We'll simulate this by adding the passed object
+        // to our internal array list of products.
+        public void insert(Product product) {
+            this.products.add(product);
+        }
+
+        public List<Product> all() {
+            return this.products;
+        }
+    }
+
+
+    -----> DAO access : DaoFactory.java <-----
+    public class DaoFactory {
+        private static Products productsDao;
+
+        public static Products getProductsDao() {
+            if (productsDao == null) {
+                productsDao = new ListProducts();
+            }
+            return productsDao;
+        }
+    }
+
+
+    -----> (C) Controller : ShowProductsServlet.java <-----
+    @WebServlet("/products")
+    public class ShowProductsServlet extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+            // Use the factory to get the dao object
+            Products productsDao = DaoFactory.getProductsDao();
+            // Use a method on the dao to get all the products
+            List<Product> products = productsDao.all();
+            // Pass the data to the jsp
+            request.setAttribute("products", products);
+            request.getRequestDispatcher("/products/index.jsp").forward(request, resp);
+        }
+    }
+
+
+    -----> (V) View : products/index.jsp <-----
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <html>
+    <head>
+        <title>View Products</title>
+    </head>
+    <body>
+        <h1>Here are all the products:</h1>
+
+        <c:forEach var="product" items="${products}">
+            <div class="product">
+                <h2>${product.name}</h2>
+                <p>Price: $ ${product.price}</p>
+            </div>
+        </c:forEach>
+
+    </body>
+    </html>
+
+
+Creating Products:
+- Creating new products (and in general, any operation that involves a user filling out a form) involves two HTTP requests:
+    1. GET -- Navigate to the page that shows the form for creating a new product
+    2. POST -- Fill out and submit the form
+- we'll need to write two separate methods for handling each request
+
+
+    -----> (C) The Control : CreateProductServlet.java <-----
+    @WebServlet("/products/create")
+    public class CreateProductServlet extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            request.getRequestDispatcher("/products/create.jsp").forward(request, response);
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            Products productsDao = DaoFactory.getProductsDao();
+            // create a new product based on the submitted data
+            String name = request.getParameter("name");
+            double price = Double.parseDouble(request.getParameter("price"));
+            Product product = new Product(name, price);
+            // persist the new product
+            productsDao.insert(product);
+            response.sendRedirect("/products");
+        }
+    }
+
+    -----> (V) The View : products/create.jsp <-----
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <html>
+    <head>
+        <title>Create A Product</title>
+    </head>
+    <body>
+        <h1>Create A Product</h1>
+        <form action="/products/create" method="post">
+            <label for="name">Name</label>
+            <input name="name" id="name" type="text">
+            <br />
+            <label for="price">Price</label>
+            <input name="price" id="price" type="text">
+            <br />
+            <input type="submit">
+        </form>
+    </body>
+    </html>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

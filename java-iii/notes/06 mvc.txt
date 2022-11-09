@@ -140,3 +140,60 @@ JavaBeans:
 - we will write model classes as beans
 - a model class represents the structure of the database table
 - an instances of the class represent a row from the database table
+
+
+
+================= Accessing Data with DAOs =================
+
+NOW: we have a way to represent tables in a database using JavaBeans
+QUESTION: how does the rest of our application (V & C) interact with the model (M) classes?
+ANSWER: create a class to handle our interactions with the database: a DAO
+
+DAO & interface:
+- a data access object (DAO) or data access class
+- design DAOs behind an interface
+- an interface will describe what the DAO does, or operations it supports
+
+    NOTE: CRUD
+        DAOs provide the interface to CRUD (create, read, update, destroy) operations for a given entity.
+        Usually each method defined on a DAO maps to a CRUD operation for that resource, and the basic CRUD
+        operations are a good starting place for methods to put on a DAO.
+
+- our application will refer to the interface vs. the DAO implementation directly
+- this allows us to easily swap out the implementation of our DAOs
+- EXAMPLE: interface to a DAO for Ad objects
+
+    // Ads interface
+    public interface Ads {
+        List<Ad> all(); // find all the ads records
+        Ad findOne(long id); // find an individual record by its id
+        void insert(Ad ad); // insert a new record
+        void update(Ad ad); // update an existing record
+        void destroy(Ad ad); // remove a record
+    }
+
+    // MySQLAdsDao class that implements the Ads interface
+    public MySqlAdsDao implements Ads {
+        ...
+    }
+
+    // DaoFactory
+    public class DaoFactory {
+        private static Ads adsDao;
+        public static Ads getAdsDao() {
+            if (adsDao == null) {
+                adsDao = new MySQLAdsDao();
+            }
+            return adsDao;
+        }
+    }
+
+
+DAO Factory:
+- factory: a class for creating objects
+- use a factory to create instances of our DAOs
+- us to reuse an existing instance
+- how the rest of our application can gain access to our DAOs
+- CRUD combines with a factory
+- DaoFactory can be used by any other part of the application to gain access to the ads DAO object
+
