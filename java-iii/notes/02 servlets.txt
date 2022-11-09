@@ -142,4 +142,108 @@ Configure IntelliJ:
 
 
 Using Servlets:
+- Broadly speaking, we'll need to do these three things when creating a servlet
+    1. Create a class the extends HttpServlet
+    2. Annotate the class with the @WebServlet annotation to specify which URL it maps to
+        web.xml
+        An alternative to configuration with annotations is with a configuration file named web.xml.
+        You may see examples of this on Stack Overflow or when searching for servlet related questions.
+        At Codeup, we'll stick to annotation based configuration, as it is less verbose, and a little more modern.
+    3. Implement a protected doGet and/or doPost method that accepts two parameters: HttpServletRequest, and HttpServletResponse
+
+    // EXAMPLE of a Servlet
+    | import java.io.*;
+    | import javax.servlet.*;
+    | import javax.servlet.http.*;
+    |
+    | @WebServlet(name = "HelloWorldServlet", urlPatterns = "/hello-world")
+    | public class HelloWorldServlet extends HttpServlet {
+    |
+    |     @Override
+    |     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    |         response.setContentType("text/html");
+    |         PrintWriter out = response.getWriter();
+    |         out.println("<h1>Hello, World!</h1>");
+    |     }
+    |
+    | }
+
+
+A Servlet Class:
+- must extend HttpServlet
+- should be a descriptive name (Ex: ViewAllProductsServlet, UserLoginServlet, UpdateProfileServlet)
+- implement a doGet method containing the Override annotation (overriding the definition from a parent class)
+- method names describe HTTP verbs (GET (doGet) or POST(doPost))
+- methods will define two parameters HttpServletRequest and HttpServletResponse
+- doGet method sets the content type of the request
+- map each servlet to a URL, meaning that each unique URL in our app will have a servlet associated with it
+
+
+Servlet Life Cycle:
+                                Tomcat Starts
+                                      |
+                                      v
+                              Servlet is Created
+                                      |
+                                      v
+           +->> request >>>>   doGet is called    >>>> response >>-+
+           |                                                       |
+           ^                                                       v
+           ^                                                       v
+           |                                                       |
+           +-<< request <<<<       Client         <<<< response <<-+
+
+- The process for a GET request looks like this:
+    1. The Tomcat web server starts up
+    2. A request for a specific URL comes to the web server (e.g. /hello-world)
+    3. If the servlet that is mapped to that URL (e.g. our HelloWorldServlet) does not exist, it is created
+    4. If the servlet has already been created, we'll use the existing one
+    5. The doGet method is called and the response is sent
+- A similar process is followed for POST requests
+- IMPORTANT NOTE:
+    + the objects created from our servlet classes persist between requests
+    + we can create instance properties that can be used across multiple requests
+    + be careful to clean up any resources we use on a single request (e.g. file handles)
+
+
+Working with Servlets:
+- most of our work will be done with the request and response objects
+- request:
+    getParameter            Extract a value for a parameter submitted along with a request (returns a string).
+    getSession              Gives access to the session object
+    setAttribute            Allows us to add a value to the request.
+
+        EXAMPLE GET REQUEST (getParameter):
+        /product-search?page=4&sort=price
+        String sortBy = request.getParameter("sort");
+        int currentPage = (int) request.getParameter("page");
+
+        EXAMPLE POST REQUEST (getParameter):
+        <form method="POST" action="/register">
+            <label for="email">Email:</label>
+            <input id="email" name="email" placeholder="Enter your email address" />
+        </form>
+        String email = request.getParameter("email");
+
+- response:
+    getWriter               java.io.PrintWriter can be used to write to the HTTP response
+    sendRedirect            Redirect to a different location
+
+
+Summary:
+Maven           adds the servlet library dependencies in our pom.xml
+IntelliJ        compiles and package our application as a WAR
+Tomcat          serves our application
+
+
+
+
+
+
+
+
+
+
+
+
 
