@@ -1,0 +1,42 @@
+
+*** JAVA III - MVC ***
+
+
+================= Introduction to MVC =================
+
+MVC:
+- Model-View-Controller
+- a design pattern for web applications
+- using servlets and JSPs together, Beans, DAOs, and Factories
+
+
+QUESTION: How should we design software applications?
+
+
+ANSWER: loose coupling
+- a good software design goal is loose coupling of the components of our application
+- classes should depend on each other to the least extent that is practical
+- achieves "separation of concerns"
+    + some examples of separating concerns are:
+        - Separating logic that manipulates data from the presentation of that data
+        - A change in a class that connects to the database shouldn't necessitate a change in a JSP
+        - Code that handles user authentication shouldn't deal with the font color on the login page
+    + separating concerns allows our code to be more reusable, maintainable, and testable.
+
+
+What Is MVC?
+- Model-View-Controller
+- a pattern for designing applications that prescribes a certain way of separating concerns
+- originally a pattern for designing user interfaces
+- become a popular paradigm in the web development world
+- MVC says that we should separate our applications into three distinct parts
+    1. Models           the representation of data in our application (Java beans)
+    2. Views            the piece of the application that handle the presentation to the user (JSP files)
+    3. Controllers      where the logic happens, and where we respond to user actions (Servlets)
+
+    	                Model	    View	        Controller
+    Responsible for	    Data	    Presentation	Logic
+    In our project	    Beans	    JSPs	        Servlets
+
+    ** See mvc.pgn **
+
