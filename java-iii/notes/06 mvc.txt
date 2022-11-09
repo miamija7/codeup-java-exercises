@@ -81,3 +81,62 @@ getRequestDispatcher:
 - should be given the path to the JSP file relative to the webapp directory
 - usually the last line in a doGet or doPost method
 - any logic or attribute setting is performed before this method is called
+
+
+
+================= Javabeans =================
+
+Representing Data in our Application:
+- data an application handles and its representation should be a separate concern
+- the M in MVC (Model-View-Controller)
+
+
+Representing Entities with Beans:
+- beans represent the entities in our application
+- entity is a singular, identifiable object
+- usually each entity is represented by a database table
+- each a discrete object
+- Example: employees database might have the following entities:
+      + Department
+      + Employee
+      + Manager
+      + Salary
+      + Title
+
+    // employees table will be the Employee bean
+    Field      | Type
+    -----------|---------------
+    emp_no     | int(11)
+    birth_date | date
+    first_name  | varchar(14)
+    last_name  | varchar(16)
+    gender     | enum('M','F')
+    hire_date  | date
+
+    // Employee bean (a model for the Employee entity)
+    public class Employee implements Serializable {
+        private long empNo;
+        private String firstName;
+        private String lastName;
+        private char gender;
+        private Date birthDate;
+        private Date hireDate;
+
+        public Employee() {  }
+
+        // getters and setters
+    }
+
+
+JavaBeans:
+- JavaBeans are Java classes that:
+    1. provides a zero-argument constructor
+    2. has getters and setters for all instance variables
+    3. implements the Serializable or Externalizable interface
+
+- the class doesn't perform any complex logic or control flow
+- many Java libraries are built around beans
+- Model Classes: classes that represent our entities, which represent information from the database
+- we will write model classes as beans
+- a model class represents the structure of the database table
+- an instances of the class represent a row from the database table
