@@ -1,0 +1,217 @@
+
+*** JAVA III - JSP & JSTL ***
+
+
+JSP:
+- Java Server Pages
+- allows us to create HTML pages with dynamic content
+- mixes Java code into our HTML
+- using JSPs is easier than writing HTML inside of strings inside of servlets
+- servlets reside in src/main/java & JSPs reside in src/main/webapp
+- JSPs are not Java source code
+
+    // EXAMPLE JSP
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%! int counter = 0; %>
+    <% counter += 1; %>
+    <html>
+    <head>
+        <title>Title</title>
+    </head>
+    <body>
+
+    <h1>The current count is <%= counter %>.</h1>
+
+    View the page source!
+
+    <%-- this is a JSP comment, you will *not* see this in the html --%>
+
+    <!-- this is an HTML comment, you *will* see this in the html -->
+
+    </body>
+    </html>
+
+- tag-like elements (<% %>) define the dynamic parts of the page
+- Processing JSP <% %> tags are evaluated, and a pure HTML response is produced
+- the JSP file is executed on the server
+
+    // THE JSP PRODUCES HTML
+    <html>
+    <head>
+        <title>Title</title>
+    </head>
+    <body>
+
+    <h1>The current count is 3.</h1>
+
+    View the page source!
+
+    <!-- this is an HTML comment, you *will* see this in the html -->
+
+    </body>
+    </html>
+
+
+JSP Directives:
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+- set conditions that apply to the entire JSP file
+
+    page directive              specify the content type of the page
+    taglib directive            import custom tags
+    include directives          include other files or JSPs (templating)
+    page import directive       import classes and libraries
+
+
+Instance variables:
+<%! int counter = 0; %>
+<% counter += 1; %>
+- code inside of <%! %> will be treated as an instance variable definition
+- similar to defining a property on a servlet class
+- variables defined in this manner will persist between page loads
+- the variable initialization only happens once
+- the variable value increments every time the page is loaded
+- <% %> tags allow us to evaluate arbitrary Java code
+
+
+JSP Comments:
+<%-- this is a JSP comment, you will *not* see this in the HTML --%>
+- code inside of <%-- --%> is treated as a comment and will not be rendered
+- JSP files are processed on the server before making it to the browser
+- this comment will not be visible to the end user
+- HTML comments will be visible to the end user because they are not enclosed in JSP tags
+
+
+JSP Tags:
+<%@ directiveName ... %>	    Directive: set values for the entire file
+<%! %>	                        Define instance variables
+<%= %>	                        evaluate an expression and print the result
+<% %>	                        evaluate arbitrary Java code
+<%-- --%>	                    comments, will not be rendered
+
+
+Includes:
+- include directive combines files together
+- useful for partial elements such as a navbar or footer
+- make a partials' directory with .jsp files containing just the html for an element
+    <nav>
+        This is My Navbar
+    </nav>
+- use the "include" directive on the page that needs the navbar
+    <%@ include file="partials/navbar.jsp" %>
+- alternative XML Syntax for this directive
+    <jsp:include page="partials/navbar.jsp"></jsp:include>
+    <jsp:include page="partials/navbar.jsp" />
+
+
+Implicit Objects:
+- many implicit objects (variables that have already been defined) available to us
+- EXAMPLE: we don't ever define request, it is already in scope for us
+
+    request         javax.servlet.http.HttpServletRequest       get values of attributes/parameters passed to a JSP page
+    response        javax.servlet.http.HttpServletResponse      send information to the client
+    out             javax.servlet.jsp.JspWriter                 send content in response
+    & more      https://docs.oracle.com/cd/E19575-01/819-3669/bnaij/index.html
+
+    // EXAMPLE OF USING IMPLICIT OBJECTS
+    <body>
+        <h1>Welcome To The Site!</h1>
+        <p>Path: <%= request.getRequestURL() %></p>
+        <p>Query String: <%= request.getQueryString() %></p>
+        <p>"name" parameter: <%= request.getParameter("name") %></p>
+        <p>"method" attribute: <%= request.getMethod() %></p>
+        <p>User-Agent header: <%= request.getHeader("user-agent") %></p>
+    </body>
+
+
+Expression Language:
+- JSP Expression Language (EL)
+- syntax that we can use in combination with our JSP files
+- makes it easy to access attributes from the request object
+- convenient way of accessing properties on objects
+- if a value is null or a reference is not defined, nothing will be output, as opposed to an exception being raised
+- more implicit objects available to us:
+
+    param           get request parameter
+    paramValues     get all the request parameters in an array
+    header          get a single header value.
+    headerValues    get request header information
+    cookie          get cookie value
+    sessionScope    get attribute value in a session
+
+    <%-- This assumes we are visiting a page and have ?page_no=5 (or something similar) appended to the query string --%>
+    <p>"page_no" parameter: ${param.page_no}</p>
+    <p>User-Agent header: ${header["user-agent"]}</p>
+
+- if object is not implicit, expression language assumes you are referring to an attribute on the request object
+- use request.setAttribute to make a value available to the EL Scope (later on, we will do this inside of a servlet)
+
+    <% request.setAttribute("message", "Hello, World!"); %>
+    <h1>Here is the message: ${message}</h1>
+
+
+JSTL:
+- JSP Standard Tag Library
+- JSP has the ability to create custom tags
+- we will use pre-defined tags for many common programming functionalities
+- Use JSTL:
+    1. Include the required dependency in our pom.xml file:
+       <dependency>
+           <groupId>jstl</groupId>
+           <artifactId>jstl</artifactId>
+           <version>1.2</version>
+       </dependency>
+    2. Add the taglib directive on pages we are using the JSTL on
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+- tags are prefixed with c:
+- each tag has zero or more attribute-value pairs
+- use JSTL in combination with the Expression Language
+- reference property names directly (as opposed to through the getter or setter in Java code)
+- can nest tags within each other
+- our conditional tags (choose), only one branch will be rendered in HTML output
+
+    EXAMPLE:
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <html>
+    <head>
+        <title>JSTL Example</title>
+    </head>
+    <body>
+        <h1>Your Shopping Cart</h1>
+
+        <c:choose>
+
+            <c:when test="${cart.isEmpty()}">
+                <h2>No items in your cart (yet).</h2>
+            </c:when>
+
+            <c:otherwise>
+                <c:forEach var="item" items="${cart.items}">
+                    <div class="item">
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                        <p>${item.price}</p>
+                        <c:if test="${item.isOnSale}">
+                            <p>This item is on sale!</p>
+                        </c:if>
+                    </item>
+                </c:forEach>
+            </c:otherwise>
+
+        </c:choose>
+
+    </body>
+    </html>
+
+
+Tags:
+    c:choose            if-else                 <c:choose> ... </c:choose>
+    c:when              if                      <c:when test="${condition}"> ... </c:when>
+    c:otherwise         else                    <c:otherwise> ... </c:otherwise>
+    c:forEach           enhanced for loop       <c:forEach items="${collection}" var="element"> ... </c:forEach>
+    c:if                if only                 <c:if test="${condition}"> ... </c:if>
+
+    more at https://docs.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/c/tld-summary.html
+
+
