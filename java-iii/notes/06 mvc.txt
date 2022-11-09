@@ -40,3 +40,44 @@ What Is MVC?
 
     ** See mvc.pgn **
 
+
+================= Using Servlets with JSPs =================
+
+
+Decouple our logic from our presentation:
+- we should more clearly define the role of our servlets and JSPs
+- we have written HTML inside of our servlets, and done logic inside of our JSPs, mixing logic and presentation
+- our servlets should only handle logic (no HTML inside of strings inside of servlets)
+- our JSPs should just deal with presentation (no arbitrary java inside of <% %>)
+- pass data from our servlet to a JSP file through two primary methods on the request object:
+    1. setAttribute                 pass the value of the name variable to the view
+    2. getRequestDispatcher         send the request forward to the hello.jsp file
+
+    // EXAMPLE
+    // Controller: HelloServlet.java
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        if (name == null) {
+            name = "World!";
+        } else if (name.equals("bgates")) {
+            response.sendRedirect("https://microsoft.com");
+            return;
+        }
+        request.setAttribute("name", name);
+        request.getRequestDispatcher("/hello.jsp").forward(request, response);
+    }
+    // View: hello.jsp
+    <h1>Hello there, ${name}!</h1>
+
+
+setAttribute:
+- make a value available in the JSP
+- defines the variable name in the JSP (1st arg)
+- defines the value for that variable (2nd arg)
+
+
+getRequestDispatcher:
+- pass the flow of control from our servlet to a JSP
+- should be given the path to the JSP file relative to the webapp directory
+- usually the last line in a doGet or doPost method
+- any logic or attribute setting is performed before this method is called
