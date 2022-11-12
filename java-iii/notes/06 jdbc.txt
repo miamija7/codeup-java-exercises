@@ -1,2 +1,48 @@
 
 *** JAVA III - JDBC ***
+
+How to get Java and MySQL communicating.
+
+Database Drivers:
+- a database driver is a program that translates between Java and the database server
+- different drivers required for each DBMS
+- the dependency we will use for the MySQL database driver:
+
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.23</version>
+    </dependency>
+
+
+
+Working With Databases In Java:
+- in order to talk to a database and return results, we need to:
+    1. Connect to the database; obtain a connection object
+    2. Create a statement object
+    3. Execute the statement with our SQL based on its type
+    4. Work with the results of the query; the resultset object
+- most methods on the objects we will be working with can throw a SQLException
+
+
+
+Connecting To A Database:
+- use the static getConnection method of the DriverManager class to return a Connection object
+- requires a URL for the database, a username of the user to connect as, and the password for that user
+- the Driver class we are instantiating comes from the com.mysql namespace, not the java.sql package
+- we generally create ONE connection, and then continue to re-use that same connection object
+
+    // A Connection Object
+    import java.sql.DriverManager;
+    import com.mysql.cj.jdbc.Driver;
+    // ...
+    DriverManager.registerDriver(new Driver());
+    Connection connection = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/codeup_test_db?allowPublicKeyRetrieval=true&useSSL=false",
+        "username",
+        "password"
+    );
+
+
+Creating And Executing Statements:
+
