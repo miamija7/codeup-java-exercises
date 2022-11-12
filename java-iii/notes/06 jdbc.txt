@@ -45,4 +45,31 @@ Connecting To A Database:
 
 
 Creating And Executing Statements:
+- our connection object can be used to create statement objects
+- statement objects represent an individual SQL statement
+- use the .createStatement() method on the connection object
+
+    Statement statement = connection.createStatement();
+
+- way we run the commands depends on the statement
+- three different methods on the statement object:
+    1. statement.execute("DELETE FROM albums WHERE id = 4");
+    2. statement.executeUpdate("INSERT INTO albums (artist, name, release_date, genre, sales) VALUES('Nelly Furtado', 'Loose', 2006, 'Dance-pop, hip hop, R&B', 12.5)");
+    3. statement.executeQuery("SELECT * FROM albums");
+
+    execute                 returns a boolean indicating success
+    executeUpdate           returns the number of rows affected
+    executeQuery            returns a ResultSet object
+
+
+
+Handling Result Sets:
+- think of the result set object as a kind of cursor that iterates over the rows
+- call the .next() method on the result set object to move the cursor through our results row by row
+
+    .next()                 return true as long as there are rows left in our result
+
+    ResultSet rs = statement.executeQuery("SELECT * FROM albums");
+    while (rs.next()) { ... }
+
 
